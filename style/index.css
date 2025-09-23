@@ -8,7 +8,147 @@
 
 /* Hero */
 .hero{
-  position:relative; min-height: clamp(60vh, 70vh, 78vh);
+  position:relative; min-h/* =========================================================
+   StreamFlix – INDEX (Accueil type Netflix)
+   - Billboard (hero) avec fade bottom
+   - Rails horizontaux (scroll-snap, overflow-x)
+   - Tiles avec preview au hover (sans JS)
+   - Progress bar, classement Top
+   - Breakpoints (5) & perfs (transform/opacity)
+========================================================= */
+
+/* Billboard / Hero */
+.billboard{
+  position:relative; min-height: clamp(64vh, 70vh, 82vh);
+  display:grid; align-items:end; padding-block: 14vh 8vh;
+}
+.billboard__bg{
+  position:absolute; inset:0;
+  background-image: var(--billboard);
+  background-size: cover; background-position: center;
+  filter: brightness(.9) saturate(1.05);
+}
+.billboard::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(1200px 400px at 20% 0%, rgba(0,0,0,.55), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.30) 40%, rgba(0,0,0,.85) 100%);
+}
+.billboard__content{ position:relative; z-index:1; }
+.billboard__badges{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.5rem; }
+.pill{ background:#ffffff; color:#111; border-radius:.5rem; padding:.2rem .6rem; font-weight:800; font-size:.85rem; }
+.pill--top{ background: var(--accent); color:#fff; }
+.billboard__title{ margin:.25rem 0 .25rem; font-size: clamp(2rem, 1.2rem + 4vw, 4rem); line-height:1.05; font-weight:800; letter-spacing:.2px; }
+.billboard__meta{ color: var(--text-muted); margin: .25rem 0 .75rem; }
+.billboard__desc{ max-width: 60ch; font-size: var(--fs-1); color:#ededed; margin: 0 0 1rem; }
+.billboard__actions{ display:flex; gap:.75rem; }
+.billboard__fade-bottom{
+  position:absolute; inset:auto 0 0 0; height: 16vh;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.7) 60%, rgba(0,0,0,1) 100%);
+  pointer-events:none;
+}
+
+/* Rails */
+.rail{ padding-block: var(--space-3); }
+.rail__head{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-2);
+  margin-bottom: .5rem;
+}
+.rail__title{ margin:0; font-size: var(--fs-2); }
+.rail__controls{ display:flex; gap:.4rem; }
+.rail__btn{
+  width:36px; height:36px; border-radius:999px; border:1px solid var(--border);
+  background: rgba(255,255,255,.06); color: var(--text);
+  display:grid; place-items:center; cursor:pointer;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.rail__btn:hover{ background: rgba(255,255,255,.12); transform: translateY(-1px); }
+
+.rail__viewport{
+  position:relative; overflow-x:auto; overflow-y:hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: .5rem;
+  padding-bottom: .25rem;
+}
+.rail__viewport::-webkit-scrollbar{ height: 0; }
+
+.rail__track{
+  list-style:none; margin:0; padding:0;
+  display:flex; gap:.5rem;
+}
+
+/* Tiles (cartes poster 16:9) */
+.tile{
+  position:relative;
+  flex: 0 0 var(--tile-w);
+  scroll-snap-align: start;
+  border-radius:.6rem; overflow:visible; /* pour preview */
+}
+.tile__link{ display:block; border-radius:.6rem; overflow:hidden; border:1px solid var(--border); background: var(--card); }
+.tile__art img{ width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block; transition: transform var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease); }
+
+/* Rank */
+.tile--ranked .tile__link { position: relative; }
+.tile__rank{
+  position:absolute; inset:auto auto .25rem .25rem; z-index:1;
+  font-weight:800; font-size: 2rem; line-height:1;
+  -webkit-text-stroke:6px rgba(0,0,0,.55); text-shadow:0 2px 12px rgba(0,0,0,.7);
+}
+
+/* Progress (continue watching) */
+.tile__progress{
+  position:absolute; left:2px; right:2px; bottom:2px; height:4px; border-radius:2px; overflow:hidden;
+  background: rgba(255,255,255,.15);
+}
+.tile__progress::after{ content:""; display:block; height:100%; width:var(--progress,0%); background: var(--accent); }
+
+/* Preview (panneau qui s’ouvre au hover) */
+.preview{
+  position:absolute; left:0; right:auto; top:100%; transform-origin: top left;
+  width: min(88vw, 540px);
+  background: var(--bg-elev); border:1px solid var(--border);
+  border-radius: .75rem; box-shadow: var(--shadow-lg);
+  padding: .75rem; margin-top: .5rem; z-index: 5; opacity: 0; visibility: hidden;
+  transform: translateY(-6px) scale(.98);
+  transition: opacity var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease), visibility var(--dur-mid) var(--ease);
+}
+.tile:hover .preview{
+  opacity: 1; visibility: visible; transform: translateY(0) scale(1);
+}
+.tile:hover .tile__art img{ transform: scale(1.03); filter: saturate(1.05); }
+
+.preview__actions{ display:flex; gap:.4rem; margin-bottom:.5rem; }
+.preview__meta{ display:flex; gap:.75rem; align-items:center; margin-bottom:.25rem; color: var(--text-muted); }
+.preview__meta .match{ color: #22c55e; font-weight:700; }
+.preview__meta .age{ border:1px solid var(--border); border-radius:.4rem; padding:.1rem .35rem; }
+.preview__meta .quality{ border:1px solid var(--border); border-radius:.4rem; padding:.1rem .35rem; }
+.preview__desc{ margin:.25rem 0 .5rem; color:#e9e9e9; }
+.preview__tags{ list-style:none; display:flex; flex-wrap:wrap; gap:.4rem; padding:0; margin:0; }
+.preview__tags li{ color: var(--text-muted); }
+
+/* Effets focus */
+a:where(.tile__link, .btn):focus-visible{ outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
+/* Breakpoints: largeur des tiles par rangée */
+@media (min-width: 480px){
+  :root{ --tile-w: var(--tile-w-sm); }
+}
+@media (min-width: 640px){
+  :root{ --tile-w: var(--tile-w-md); }
+}
+@media (min-width: 1024px){
+  :root{ --tile-w: var(--tile-w-lg); }
+}
+@media (min-width: 1280px){
+  :root{ --tile-w: var(--tile-w-xl); }
+}
+
+/* Accessibilité et perfs mineures */
+@media (prefers-reduced-motion: reduce){
+  .billboard::before, .tile__art img, .preview { transition: none !important; }
+}
+eight: clamp(60vh, 70vh, 78vh);
   display:grid; align-items:end; padding-block:10vh 6vh;
 }
 .hero__media{
