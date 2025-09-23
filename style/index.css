@@ -1,0 +1,81 @@
+/* =========================================================
+   StreamFlix – INDEX (Accueil)
+   - Hero + parallax léger
+   - Sections rangées / grilles
+   - Staggered animations
+   - Skeleton scan (optionnel)
+========================================================= */
+
+/* Hero */
+.hero{
+  position:relative; min-height: clamp(60vh, 70vh, 78vh);
+  display:grid; align-items:end; padding-block:10vh 6vh;
+}
+.hero__media{
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(1200px 400px at 20% 0%, rgba(0,0,0,.55), transparent 60%),
+    var(--hero-img);
+  background-size:cover; background-position:center;
+  transform: translateZ(0);
+}
+.hero__media::before,
+.hero__media::after{ content:""; position:absolute; inset:0; pointer-events:none; }
+.hero__media::before{ background: radial-gradient(60vw 40vh at 70% 30%, rgba(229,9,20,.25), transparent 60%); transform: translate3d(0,0,0); }
+.hero__media::after{ background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.30) 40%, rgba(0,0,0,.85) 100%); }
+.hero__content{ position:relative; z-index:1; }
+.hero__title{ font-size: var(--fs-4); line-height:1.05; max-width:22ch; margin:0 0 .5rem; }
+.badge{ display:inline-block; font-size:.9rem; font-weight:800; letter-spacing:.5px; background:#fff; color:#111; border-radius:.5rem; padding:.2rem .5rem; margin-right:.5rem; }
+.hero__meta{ color:var(--text-muted); margin:.25rem 0 1rem; }
+.hero__desc{ font-size: var(--fs-1); max-width:55ch; color:#eaeaea; margin:0 0 1rem; }
+.hero__actions{ display:flex; gap:.5rem; }
+
+/* Rangées / grilles */
+.page__content{ position:relative; margin-top:-3vh; }
+.row{ padding-block: var(--space-4); }
+.row__head{ display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-2); margin-bottom:.75rem; }
+.row__title{ font-size: var(--fs-2); margin:0; }
+.row__cta{ color:var(--text-muted); font-weight:600; }
+.row__cta:hover{ color:var(--text); }
+
+.row__grid{
+  display:grid; gap:.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(var(--poster-w), 1fr));
+}
+
+/* Staggered reveal */
+@keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+.row__grid > *{ opacity:0; animation: fadeUp .6s var(--ease) forwards; }
+.row__grid > *:nth-child(1){ animation-delay:.06s; }
+.row__grid > *:nth-child(2){ animation-delay:.12s; }
+.row__grid > *:nth-child(3){ animation-delay:.18s; }
+.row__grid > *:nth-child(4){ animation-delay:.24s; }
+.row__grid > *:nth-child(5){ animation-delay:.30s; }
+.row__grid > *:nth-child(6){ animation-delay:.36s; }
+
+/* Skeleton scan */
+.skeleton-mask{
+  position:absolute; inset:0 auto auto 0; height:180px; width:50%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  transform: translateX(-100%);
+  animation: skeleton-scan 1.6s var(--ease) infinite;
+  pointer-events:none; opacity:.4;
+}
+@keyframes skeleton-scan{ from{ transform: translateX(-100%);} to{ transform: translateX(200%);} }
+
+/* Breakpoints page index */
+@media (min-width: 640px){
+  .hero{ min-height:70vh; }
+}
+@media (min-width: 480px){
+  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-sm), 1fr)); }
+}
+@media (min-width: 640px){
+  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-md), 1fr)); }
+}
+@media (min-width: 1024px){
+  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-lg), 1fr)); }
+}
+@media (min-width: 1280px){
+  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-xl), 1fr)); }
+}
