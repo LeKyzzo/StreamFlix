@@ -4,36 +4,37 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StreamFlix — Accueil</title>
-  <meta name="description" content="StreamFlix — Accueil. UI de streaming type Netflix, HTML/CSS only, prête pour API." />
+  <meta name="description" content="StreamFlix — Accueil. UI streaming moderne, HTML/CSS only, prête pour API." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Unbounded:wght@700&display=swap" rel="stylesheet">
-  <!-- CSS séparés -->
+
   <link rel="stylesheet" href="./style/global.css" />
   <link rel="stylesheet" href="./style/index.css" />
 </head>
 <body class="page page--home">
-  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="container header__inner">
       <a class="brand" href="./index.html" aria-label="Accueil StreamFlix">
         <span class="brand__mark">●</span>
         <span class="brand__name">StreamFlix</span>
       </a>
-
       <nav class="nav" role="navigation" aria-label="Navigation principale">
         <a class="nav__link is-active" href="#">Accueil</a>
-        <a class="nav__link" href="#" data-genre="series">Séries</a>
-        <a class="nav__link" href="#" data-genre="movies">Films</a>
-        <a class="nav__link" href="#" data-genre="new">Nouveautés</a>
-        <a class="nav__link" href="#" data-genre="mylist">Ma liste</a>
+        <a class="nav__link" href="#">Séries</a>
+        <a class="nav__link" href="#">Films</a>
+        <a class="nav__link" href="#">Nouveautés</a>
+        <a class="nav__link" href="#">Ma liste</a>
       </nav>
-
       <div class="header-actions">
         <form class="search" role="search" aria-label="Rechercher" action="#" method="get">
           <input class="search__input" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher un titre" />
-          <button class="btn btn--icon" type="submit" aria-label="Rechercher"><span class="icon">🔍</span></button>
+          <button class="btn btn--icon" type="submit" aria-label="Rechercher">
+            <span class="icon">🔍</span>
+          </button>
         </form>
-        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme"><span class="icon">🌓</span></button>
+        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme">
+          <span class="icon">🌓</span>
+        </button>
         <button class="avatar" aria-haspopup="menu" aria-label="Profil">
           <img src="https://picsum.photos/seed/user/80/80" alt="" />
         </button>
@@ -41,153 +42,120 @@
     </div>
   </header>
 
-  <!-- Billboard / Hero -->
-  <section class="billboard" aria-label="Mise en avant">
-    <div class="billboard__bg" style="--billboard:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=2000&auto=format&fit=crop');"></div>
-    <div class="container billboard__content" data-featured-id="tnw">
-      <div class="billboard__badges">
-        <span class="pill pill--top">Top 10 aujourd’hui</span>
-        <span class="pill">Nouveau</span>
-        <span class="pill">4K</span>
-      </div>
-      <h1 class="billboard__title">The Night Wanderer</h1>
-      <p class="billboard__meta">2024 • 16+ • Thriller • 1 saison</p>
-      <p class="billboard__desc">Un détective insomniaque traque un justicier nocturne dans une ville où chaque ombre cache un secret.</p>
-      <div class="billboard__actions">
+  <section class="hero" aria-label="Mise en avant">
+    <div class="hero__media" style="--hero-img:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=2000&auto=format&fit=crop');">
+      <div class="hero__gradient"></div>
+    </div>
+    <div class="container hero__content">
+      <h1 class="hero__title">
+        <span class="badge">Top 10</span>
+        The Night Wanderer
+      </h1>
+      <p class="hero__meta">2024 • 16+ • 1 saison • Thriller</p>
+      <p class="hero__desc">
+        Un détective insomniaque traque un énigmatique justicier nocturne dans une ville où chaque ombre cache un secret.
+      </p>
+      <div class="hero__actions">
         <a class="btn btn--primary" href="./html/movie.html?id=tnw" data-movie-id="tnw">▶️ Lecture</a>
         <a class="btn btn--ghost" href="./html/movie.html?id=tnw" data-movie-id="tnw">ℹ️ Plus d’infos</a>
       </div>
     </div>
-    <!-- Ombres latérales façon Netflix -->
-    <div class="billboard__fade-bottom" aria-hidden="true"></div>
   </section>
 
-  <!-- Rails horizontaux, scroll-snap + flèches (prêtes JS) -->
-  <main id="main" class="page__content" role="main">
-    <!-- Continue Watching -->
-    <section class="rail" data-row="continue">
-      <div class="container rail__head">
-        <h2 class="rail__title">Reprendre la lecture</h2>
-        <div class="rail__controls">
-          <button class="rail__btn rail__btn--prev" aria-label="Précédent" data-action="scroll-prev">❮</button>
-          <button class="rail__btn rail__btn--next" aria-label="Suivant" data-action="scroll-next">❯</button>
-        </div>
+  <main class="page__content" id="main" role="main">
+    <div class="skeleton-mask" aria-hidden="true"></div>
+
+    <section class="row" aria-label="Reprendre la lecture">
+      <div class="container row__head">
+        <h2 class="row__title">Reprendre la lecture</h2>
+        <a class="row__cta" href="#">Tout voir</a>
       </div>
+      <div class="container row__grid" data-row="continue">
+        <a class="card" href="./html/movie.html?id=alpha" data-movie-id="alpha">
+          <figure class="card__media">
+            <picture>
+              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/alpha-lg/800/450">
+              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/alpha-md/600/338">
+              <img src="https://picsum.photos/seed/alpha-sm/420/236" alt="Alpha — visuel" loading="lazy" />
+            </picture>
+            <figcaption class="sr-only">Alpha</figcaption>
+          </figure>
+          <div class="card__progress" style="--progress:62%"></div>
+        </a>
 
-      <div class="rail__viewport container" tabindex="0" aria-label="Reprendre la lecture — carrousel">
-        <ul class="rail__track" role="list">
-          <!-- TILE (structure stable pour alimentation API) -->
-          <li class="tile" data-id="alpha" data-type="movie">
-            <a class="tile__link" href="./html/movie.html?id=alpha" aria-label="Alpha">
-              <figure class="tile__art">
-                <picture>
-                  <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/alpha-lg/800/450">
-                  <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/alpha-md/600/338">
-                  <img src="https://picsum.photos/seed/alpha-sm/420/236" alt="Alpha — visuel" loading="lazy" />
-                </picture>
-              </figure>
-            </a>
-            <div class="tile__progress" style="--progress:62%"></div>
+        <a class="card" href="./html/movie.html?id=beta" data-movie-id="beta">
+          <figure class="card__media">
+            <picture>
+              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/beta-lg/800/450">
+              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/beta-md/600/338">
+              <img src="https://picsum.photos/seed/beta-sm/420/236" alt="Beta — visuel" loading="lazy" />
+            </picture>
+            <figcaption class="sr-only">Beta</figcaption>
+          </figure>
+          <div class="card__progress" style="--progress:35%"></div>
+        </a>
 
-            <!-- Preview au survol -->
-            <div class="preview" aria-hidden="true">
-              <div class="preview__actions">
-                <a class="btn btn--primary btn--round" href="./html/movie.html?id=alpha" aria-label="Lecture">▶️</a>
-                <button class="btn btn--ghost btn--round" aria-label="Ajouter à ma liste" data-action="add">＋</button>
-                <button class="btn btn--ghost btn--round" aria-label="J’aime" data-action="like">❤</button>
-              </div>
-              <div class="preview__meta"><span class="match">97% de compatibilité</span><span class="age">13+</span><span class="quality">HD</span></div>
-              <p class="preview__desc">Quand une expérience tourne mal, une équipe affronte l’inattendu.</p>
-              <ul class="preview__tags" aria-label="Genres"><li>SF</li><li>Action</li><li>Sombre</li></ul>
-            </div>
-          </li>
+        <a class="card" href="./html/movie.html?id=gamma" data-movie-id="gamma">
+          <figure class="card__media">
+            <picture>
+              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/gamma-lg/800/450">
+              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/gamma-md/600/338">
+              <img src="https://picsum.photos/seed/gamma-sm/420/236" alt="Gamma — visuel" loading="lazy" />
+            </picture>
+            <figcaption class="sr-only">Gamma</figcaption>
+          </figure>
+          <div class="card__progress" style="--progress:78%"></div>
+        </a>
 
-          <li class="tile" data-id="beta" data-type="movie">
-            <a class="tile__link" href="./html/movie.html?id=beta" aria-label="Beta">
-              <figure class="tile__art"><img src="https://picsum.photos/seed/beta/420/236" alt="Beta" loading="lazy" /></figure>
-            </a>
-            <div class="tile__progress" style="--progress:35%"></div>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=beta">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">90%</span><span class="age">16+</span><span class="quality">HD</span></div><p class="preview__desc">Une traque haletante à travers les néons d’une cité portuaire.</p><ul class="preview__tags"><li>Thriller</li><li>Crime</li></ul></div>
-          </li>
-
-          <li class="tile" data-id="gamma" data-type="show">
-            <a class="tile__link" href="./html/movie.html?id=gamma" aria-label="Gamma">
-              <figure class="tile__art"><img src="https://picsum.photos/seed/gamma/420/236" alt="Gamma" loading="lazy" /></figure>
-            </a>
-            <div class="tile__progress" style="--progress:78%"></div>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=gamma">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">92%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">Des anomalies électromagnétiques bousculent une petite ville.</p><ul class="preview__tags"><li>Fantastique</li><li>Années 80</li></ul></div>
-          </li>
-
-          <li class="tile" data-id="delta" data-type="movie">
-            <a class="tile__link" href="./html/movie.html?id=delta" aria-label="Delta">
-              <figure class="tile__art"><img src="https://picsum.photos/seed/delta/420/236" alt="Delta" loading="lazy" /></figure>
-            </a>
-            <div class="tile__progress" style="--progress:12%"></div>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=delta">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">88%</span><span class="age">7+</span><span class="quality">HD</span></div><p class="preview__desc">Un road-trip inattendu réunit deux inconnus.</p><ul class="preview__tags"><li>Comédie</li><li>Feel-good</li></ul></div>
-          </li>
-
-          <li class="tile" data-id="echo" data-type="movie">
-            <a class="tile__link" href="./html/movie.html?id=echo" aria-label="Echo"><figure class="tile__art"><img src="https://picsum.photos/seed/echo/420/236" alt="Echo" loading="lazy" /></figure></a>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=echo">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">93%</span><span class="age">13+</span><span class="quality">4K</span></div><p class="preview__desc">Un message venu d’ailleurs bouleverse la Terre.</p><ul class="preview__tags"><li>SF</li><li>Drame</li></ul></div>
-          </li>
-        </ul>
+        <a class="card" href="./html/movie.html?id=delta" data-movie-id="delta">
+          <figure class="card__media">
+            <picture>
+              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/delta-lg/800/450">
+              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/delta-md/600/338">
+              <img src="https://picsum.photos/seed/delta-sm/420/236" alt="Delta — visuel" loading="lazy" />
+            </picture>
+            <figcaption class="sr-only">Delta</figcaption>
+          </figure>
+          <div class="card__progress" style="--progress:12%"></div>
+        </a>
       </div>
     </section>
 
-    <!-- Tendances -->
-    <section class="rail" data-row="trending" data-genre="trending">
-      <div class="container rail__head">
-        <h2 class="rail__title">Tendance maintenant</h2>
-        <div class="rail__controls">
-          <button class="rail__btn rail__btn--prev" aria-label="Précédent" data-action="scroll-prev">❮</button>
-          <button class="rail__btn rail__btn--next" aria-label="Suivant" data-action="scroll-next">❯</button>
-        </div>
+    <section class="row" aria-label="Tendance maintenant">
+      <div class="container row__head">
+        <h2 class="row__title">Tendance maintenant</h2>
+        <a class="row__cta" href="#">Tout voir</a>
       </div>
-      <div class="rail__viewport container" tabindex="0" aria-label="Tendance — carrousel">
-        <ul class="rail__track" role="list">
-          <li class="tile tile--ranked" data-id="tnw" style="--rank:1">
-            <a class="tile__link" href="./html/movie.html?id=tnw" aria-label="The Night Wanderer">
-              <figure class="tile__art"><img src="https://picsum.photos/seed/tnw/420/236" alt="The Night Wanderer" loading="lazy" /></figure>
-              <span class="tile__rank">1</span>
-            </a>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=tnw">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">99%</span><span class="age">16+</span><span class="quality">4K</span></div><p class="preview__desc">La nuit appartient à celles et ceux qui n’ont plus rien à perdre.</p><ul class="preview__tags"><li>Noir</li><li>Thriller</li></ul></div>
-          </li>
-
-          <li class="tile tile--ranked" data-id="flare" style="--rank:2">
-            <a class="tile__link" href="./html/movie.html?id=flare"><figure class="tile__art"><img src="https://picsum.photos/seed/flare/420/236" alt="Flare" loading="lazy" /></figure><span class="tile__rank">2</span></a>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=flare">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">95%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">Une aurore solaire met la planète à genoux.</p><ul class="preview__tags"><li>Catastrophe</li><li>Drame</li></ul></div>
-          </li>
-
-          <li class="tile tile--ranked" data-id="ionic" style="--rank:3">
-            <a class="tile__link" href="./html/movie.html?id=ionic"><figure class="tile__art"><img src="https://picsum.photos/seed/ionic/420/236" alt="Ionic" loading="lazy" /></figure><span class="tile__rank">3</span></a>
-            <div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=ionic">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">94%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">Des hackers se heurtent à une IA devenue incontrôlable.</p><ul class="preview__tags"><li>Tech</li><li>Thriller</li></ul></div>
-          </li>
-
-          <li class="tile" data-id="jade"><a class="tile__link" href="./html/movie.html?id=jade"><figure class="tile__art"><img src="https://picsum.photos/seed/jade/420/236" alt="Jade" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=jade">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">89%</span><span class="age">7+</span><span class="quality">HD</span></div><p class="preview__desc">Une chasse au trésor urbaine vire au casse-tête.</p><ul class="preview__tags"><li>Aventure</li></ul></div></li>
-
-          <li class="tile" data-id="kite"><a class="tile__link" href="./html/movie.html?id=kite"><figure class="tile__art"><img src="https://picsum.photos/seed/kite/420/236" alt="Kite" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=kite">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">86%</span><span class="age">7+</span><span class="quality">HD</span></div><p class="preview__desc">Grandir, c’est parfois savoir lâcher prise.</p><ul class="preview__tags"><li>Famille</li><li>Indé</li></ul></div></li>
-        </ul>
+      <div class="container row__grid" data-row="trending">
+        <a class="card card--ranked" href="./html/movie.html?id=tnw" data-movie-id="tnw" style="--rank:1">
+          <figure class="card__media"><img src="https://picsum.photos/seed/tnw/420/236" alt="The Night Wanderer — visuel" loading="lazy" /></figure>
+          <span class="card__rank" aria-hidden="true">1</span>
+        </a>
+        <a class="card card--ranked" href="./html/movie.html?id=echo" data-movie-id="echo" style="--rank:2">
+          <figure class="card__media"><img src="https://picsum.photos/seed/echo/420/236" alt="Echo — visuel" loading="lazy" /></figure>
+          <span class="card__rank" aria-hidden="true">2</span>
+        </a>
+        <a class="card card--ranked" href="./html/movie.html?id=flare" data-movie-id="flare" style="--rank:3">
+          <figure class="card__media"><img src="https://picsum.photos/seed/flare/420/236" alt="Flare — visuel" loading="lazy" /></figure>
+          <span class="card__rank" aria-hidden="true">3</span>
+        </a>
+        <a class="card" href="./html/movie.html?id=ionic" data-movie-id="ionic"><figure class="card__media"><img src="https://picsum.photos/seed/ionic/420/236" alt="Ionic — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=jade" data-movie-id="jade"><figure class="card__media"><img src="https://picsum.photos/seed/jade/420/236" alt="Jade — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=kite" data-movie-id="kite"><figure class="card__media"><img src="https://picsum.photos/seed/kite/420/236" alt="Kite — visuel" loading="lazy" /></figure></a>
       </div>
     </section>
 
-    <!-- Ma liste -->
-    <section class="rail" data-row="mylist" data-genre="list">
-      <div class="container rail__head">
-        <h2 class="rail__title">Ma liste</h2>
-        <div class="rail__controls">
-          <button class="rail__btn rail__btn--prev" aria-label="Précédent" data-action="scroll-prev">❮</button>
-          <button class="rail__btn rail__btn--next" aria-label="Suivant" data-action="scroll-next">❯</button>
-        </div>
+    <section class="row" aria-label="Ma liste">
+      <div class="container row__head">
+        <h2 class="row__title">Ma liste</h2>
+        <a class="row__cta" href="#">Gérer</a>
       </div>
-
-      <div class="rail__viewport container" tabindex="0" aria-label="Ma liste — carrousel">
-        <ul class="rail__track" role="list">
-          <li class="tile" data-id="loom"><a class="tile__link" href="./html/movie.html?id=loom"><figure class="tile__art"><img src="https://picsum.photos/seed/loom/420/236" alt="Loom" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=loom">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">91%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">Des secrets cousus de fil noir…</p><ul class="preview__tags"><li>Drame</li></ul></div></li>
-          <li class="tile" data-id="maze"><a class="tile__link" href="./html/movie.html?id=maze"><figure class="tile__art"><img src="https://picsum.photos/seed/maze/420/236" alt="Maze" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=maze">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">88%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">Sortir du labyrinthe n’est que le début.</p><ul class="preview__tags"><li>Mystère</li></ul></div></li>
-          <li class="tile" data-id="nova"><a class="tile__link" href="./html/movie.html?id=nova"><figure class="tile__art"><img src="https://picsum.photos/seed/nova/420/236" alt="Nova" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=nova">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">93%</span><span class="age">7+</span><span class="quality">4K</span></div><p class="preview__desc">Une astronome face à l’impossible.</p><ul class="preview__tags"><li>SF</li><li>Poétique</li></ul></div></li>
-          <li class="tile" data-id="onyx"><a class="tile__link" href="./html/movie.html?id=onyx"><figure class="tile__art"><img src="https://picsum.photos/seed/onyx/420/236" alt="Onyx" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=onyx">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">87%</span><span class="age">16+</span><span class="quality">HD</span></div><p class="preview__desc">Quand la nuit avale tout.</p><ul class="preview__tags"><li>Horreur</li></ul></div></li>
-          <li class="tile" data-id="pulse"><a class="tile__link" href="./html/movie.html?id=pulse"><figure class="tile__art"><img src="https://picsum.photos/seed/pulse/420/236" alt="Pulse" loading="lazy" /></figure></a><div class="preview"><div class="preview__actions"><a class="btn btn--primary btn--round" href="./html/movie.html?id=pulse">▶️</a><button class="btn btn--ghost btn--round">＋</button><button class="btn btn--ghost btn--round">❤</button></div><div class="preview__meta"><span class="match">85%</span><span class="age">13+</span><span class="quality">HD</span></div><p class="preview__desc">La ville au rythme d’un battement.</p><ul class="preview__tags"><li>Musical</li></ul></div></li>
-        </ul>
+      <div class="container row__grid" data-row="mylist">
+        <a class="card" href="./html/movie.html?id=loom" data-movie-id="loom"><figure class="card__media"><img src="https://picsum.photos/seed/loom/420/236" alt="Loom — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=maze" data-movie-id="maze"><figure class="card__media"><img src="https://picsum.photos/seed/maze/420/236" alt="Maze — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=nova" data-movie-id="nova"><figure class="card__media"><img src="https://picsum.photos/seed/nova/420/236" alt="Nova — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=onyx" data-movie-id="onyx"><figure class="card__media"><img src="https://picsum.photos/seed/onyx/420/236" alt="Onyx — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=pulse" data-movie-id="pulse"><figure class="card__media"><img src="https://picsum.photos/seed/pulse/420/236" alt="Pulse — visuel" loading="lazy" /></figure></a>
       </div>
     </section>
   </main>
