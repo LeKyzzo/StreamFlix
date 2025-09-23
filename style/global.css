@@ -1,16 +1,17 @@
 /* =========================================================
    StreamFlix – GLOBAL
    - Reset, variables, thèmes
-   - Header, nav, boutons, cartes génériques
-   - Footer, helpers
+   - Header/nav, boutons, helpers
+   - Cartes génériques, footer
    - Breakpoints globaux
+   Mobile-first • Aucune modif HTML requise
 ========================================================= */
 
 /* Reset minimal */
 *,
 *::before,
 *::after { box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { height: 100%; width: 100%; overflow-x: hidden;}
 body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 img, picture, video, canvas { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; }
@@ -19,12 +20,14 @@ a { color: inherit; text-decoration: none; }
 
 /* Variables + thèmes */
 :root {
+  /* Typo */
   --fs-0: clamp(.94rem, .88rem + .30vw, 1rem);
   --fs-1: clamp(1.10rem, .95rem + .70vw, 1.25rem);
   --fs-2: clamp(1.35rem, 1.05rem + 1.50vw, 1.6rem);
   --fs-3: clamp(1.70rem, 1.10rem + 2.50vw, 2.2rem);
   --fs-4: clamp(2.20rem, 1.20rem + 4.00vw, 3rem);
 
+  /* Espace */
   --space-1: .5rem;
   --space-2: .75rem;
   --space-3: 1rem;
@@ -32,30 +35,35 @@ a { color: inherit; text-decoration: none; }
   --space-5: 2rem;
   --space-6: 3rem;
 
+  /* Couleurs (dark) */
   --bg: #0b0b0f;
   --bg-elev: #0f1117;
   --bg-muted: #12131a;
   --text: #e6e6e9;
   --text-muted: #a3a4ad;
-  --accent: #e50914;
-  --accent-2: #ffb703;
+  --accent: #e50914;   /* rouge streaming */
+  --accent-2: #ffb703; /* focus/fx */
   --card: #141822;
   --border: #24283b;
 
+  /* Effets */
   --shadow-sm: 0 1px 2px rgba(0,0,0,.15);
   --shadow-md: 0 6px 18px rgba(0,0,0,.2);
   --shadow-lg: 0 16px 40px rgba(0,0,0,.35);
 
+  /* Layout */
   --max-w: 1400px;
   --header-h: 56px;
   --header-h-scrolled: 48px;
 
-  --poster-w: 42vw;
-  --poster-w-sm: 32vw;
-  --poster-w-md: 22vw;
-  --poster-w-lg: 16.6vw;
-  --poster-w-xl: 14vw;
+  /* Largeur des posters (rails horizontaux) */
+  --tile-w: 72vw;     /* mobile ~2 visibles */
+  --tile-w-sm: 54vw;  /* ≥480px */
+  --tile-w-md: 36vw;  /* ≥640px */
+  --tile-w-lg: 24vw;  /* ≥1024px */
+  --tile-w-xl: 19vw;  /* ≥1280px */
 
+  /* Animations */
   --dur-fast: 120ms;
   --dur-mid: 260ms;
   --dur-slow: 480ms;
@@ -76,20 +84,18 @@ html[data-theme="sepia"]{
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 .page { background: var(--bg); color: var(--text); }
 
-/* Header sticky */
+/* Header sticky (look Netflix) */
 .site-header{
   position: sticky; top:0; z-index:50;
   height: var(--header-h);
-  display: grid; align-items: center;
+  display:grid; align-items:center;
   background: linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,.2) 60%, rgba(0,0,0,0));
   backdrop-filter: blur(6px);
   transition: height var(--dur-mid) var(--ease), background var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease);
 }
-.page--detail .site-header { background: rgba(0,0,0,.35); }
 .page.is-scrolled .site-header, .site-header.is-collapsed {
   height: var(--header-h-scrolled); background: rgba(0,0,0,.65); box-shadow: var(--shadow-sm);
 }
-
 .header__inner{
   display:grid; grid-template-columns:auto 1fr auto; gap:var(--space-2); align-items:center;
 }
@@ -118,22 +124,27 @@ html[data-theme="sepia"]{
 .avatar img{ width:100%; height:100%; object-fit:cover; }
 .only-desktop{ display:none; }
 
-/* Cartes génériques (utilisées sur les deux pages) */
+/* Styles de carte génériques (figure 16:9) */
 .card{
-  position:relative; border-radius:.8rem; overflow:hidden; background:var(--card); border:1px solid var(--border);
-  box-shadow:0 0 0 rgba(0,0,0,0); transform-origin:center; transition: transform var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease);
+  position:relative; border-radius:.6rem; overflow:hidden; background:var(--card); border:1px solid var(--border);
+  transform-origin:center; transition: transform var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease);
   will-change: transform; perspective:800px;
 }
 .card__media img{ width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block; }
-.card:hover{ transform: translateY(-3px) rotateY(.8deg); box-shadow: var(--shadow-md); filter: saturate(1.05); }
-/* Progress bar (visible sur index, OK en global) */
-.card__progress{ position:absolute; left:0; right:0; bottom:0; height:4px; background: rgba(255,255,255,.15); }
-.card__progress::after{ content:""; display:block; height:100%; width:var(--progress,0%); background:var(--accent); }
-/* Rank simple */
-.card--ranked{ isolation:isolate; }
-.card__rank{
-  position:absolute; inset:auto auto .25rem .25rem; z-index:1; font-weight:800; font-size:2.1rem; line-height:1;
-  -webkit-text-stroke:6px rgba(0,0,0,.5); text-shadow: 0 2px 12px rgba(0,0,0,.7);
+.card:hover{ transform: translateY(-3px) rotateY(.6deg); box-shadow: var(--shadow-md); filter: saturate(1.05); }
+
+/* Barre de progression (Reprendre) */
+.card__progress{
+  position:absolute; left:2px; right:2px; bottom:2px; height:4px; border-radius:2px;
+  background: rgba(255,255,255,.15); overflow:hidden;
+}
+.card__progress::after{ content:""; display:block; height:100%; width:var(--progress,0%); background: var(--accent); }
+
+/* Classement Top */
+.card--ranked .card__rank{
+  position:absolute; inset:auto auto .25rem .25rem; z-index:1;
+  font-weight:800; font-size: 2rem; line-height:1;
+  -webkit-text-stroke:6px rgba(0,0,0,.55); text-shadow:0 2px 12px rgba(0,0,0,.7);
 }
 
 /* Footer */
@@ -144,7 +155,7 @@ html[data-theme="sepia"]{
 .footer__nav a:hover{ color: var(--text); }
 .footer__copy{ margin:0; }
 
-/* Breakpoints globaux (nav, header utils) */
+/* Breakpoints globaux */
 @media (min-width: 480px){
   .nav{ display:flex; }
   .search__input{ width:14ch; }

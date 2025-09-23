@@ -1,49 +1,80 @@
 /* =========================================================
-   StreamFlix – INDEX (Accueil)
-   - Hero + parallax léger
-   - Sections rangées / grilles
-   - Staggered animations
-   - Skeleton scan (optionnel)
+   StreamFlix – INDEX (Home Netflix-like)
+   - Hero (billboard) avec dégradé et fade-bottom
+   - Rails horizontaux (scroll-snap) avec TON HTML existant
+   - Cartes zoom/3D au hover
+   - Skeleton & stagger
+   - 5 breakpoints
 ========================================================= */
 
-/* Hero */
+/* HERO / Billboard */
 .hero{
-  position:relative; min-height: clamp(60vh, 70vh, 78vh);
-  display:grid; align-items:end; padding-block:10vh 6vh;
+  position:relative; min-height: clamp(64vh, 70vh, 82vh);
+  display:grid; align-items:end; padding-block: 14vh 8vh;
 }
 .hero__media{
   position:absolute; inset:0;
   background-image:
     radial-gradient(1200px 400px at 20% 0%, rgba(0,0,0,.55), transparent 60%),
     var(--hero-img);
-  background-size:cover; background-position:center;
-  transform: translateZ(0);
+  background-size: cover; background-position: center;
+  filter: brightness(.92);
 }
-.hero__media::before,
-.hero__media::after{ content:""; position:absolute; inset:0; pointer-events:none; }
-.hero__media::before{ background: radial-gradient(60vw 40vh at 70% 30%, rgba(229,9,20,.25), transparent 60%); transform: translate3d(0,0,0); }
-.hero__media::after{ background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.30) 40%, rgba(0,0,0,.85) 100%); }
+.hero__media::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.30) 40%, rgba(0,0,0,.88) 100%);
+}
 .hero__content{ position:relative; z-index:1; }
-.hero__title{ font-size: var(--fs-4); line-height:1.05; max-width:22ch; margin:0 0 .5rem; }
-.badge{ display:inline-block; font-size:.9rem; font-weight:800; letter-spacing:.5px; background:#fff; color:#111; border-radius:.5rem; padding:.2rem .5rem; margin-right:.5rem; }
-.hero__meta{ color:var(--text-muted); margin:.25rem 0 1rem; }
-.hero__desc{ font-size: var(--fs-1); max-width:55ch; color:#eaeaea; margin:0 0 1rem; }
-.hero__actions{ display:flex; gap:.5rem; }
+.hero__title{ font-size: clamp(2rem, 1.2rem + 4vw, 4rem); line-height:1.05; font-weight:800; letter-spacing:.2px; margin:.25rem 0 .25rem; }
+.badge{ background: var(--accent); color:#fff; border-radius:.5rem; padding:.2rem .6rem; font-weight:800; font-size:.85rem; margin-right:.5rem; }
+.hero__meta{ color: var(--text-muted); margin: .25rem 0 .75rem; }
+.hero__desc{ max-width: 60ch; font-size: var(--fs-1); color:#ededed; margin: 0 0 1rem; }
+.hero__actions{ display:flex; gap:.75rem; }
 
-/* Rangées / grilles */
+/* PAGE CONTENT */
 .page__content{ position:relative; margin-top:-3vh; }
-.row{ padding-block: var(--space-4); }
-.row__head{ display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-2); margin-bottom:.75rem; }
-.row__title{ font-size: var(--fs-2); margin:0; }
-.row__cta{ color:var(--text-muted); font-weight:600; }
-.row__cta:hover{ color:var(--text); }
 
+/* Titre de section */
+.row{ padding-block: var(--space-3); }
+.row__head{ display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-2); margin-bottom: .5rem; }
+.row__title{ margin:0; font-size: var(--fs-2); }
+.row__cta{ color: var(--text-muted); font-weight:600; }
+.row__cta:hover{ color: var(--text); }
+
+/* === RAILS HORIZONTAUX ===
+   On garde TON HTML .row__grid mais on le transforme en rail horizontal */
 .row__grid{
-  display:grid; gap:.6rem;
-  grid-template-columns: repeat(auto-fill, minmax(var(--poster-w), 1fr));
+  display:flex;
+  gap:.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: .5rem;
+  padding-bottom: .25rem;
+}
+.row__grid::-webkit-scrollbar { height: 0; }
+
+/* Largeur des cartes (sans changer le HTML) */
+.row__grid > .card{
+  flex: 0 0 var(--tile-w);
+  scroll-snap-align: start;
 }
 
-/* Staggered reveal */
+/* Hover des cartes (Netflix-like léger) */
+.card:hover .card__media img{ transform: scale(1.03); filter: saturate(1.05); transition: transform var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease); }
+
+/* Skeleton scan optionnel */
+.skeleton-mask{
+  position:absolute; inset:0 auto auto 0; height:180px; width:50%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  transform: translateX(-100%);
+  animation: skeleton-scan 1.6s var(--ease) infinite;
+  pointer-events:none; opacity:.35;
+}
+@keyframes skeleton-scan{ from{ transform: translateX(-100%);} to{ transform: translateX(200%);} }
+
+/* Staggered reveal (apparition des cartes) */
 @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 .row__grid > *{ opacity:0; animation: fadeUp .6s var(--ease) forwards; }
 .row__grid > *:nth-child(1){ animation-delay:.06s; }
@@ -53,29 +84,21 @@
 .row__grid > *:nth-child(5){ animation-delay:.30s; }
 .row__grid > *:nth-child(6){ animation-delay:.36s; }
 
-/* Skeleton scan */
-.skeleton-mask{
-  position:absolute; inset:0 auto auto 0; height:180px; width:50%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
-  transform: translateX(-100%);
-  animation: skeleton-scan 1.6s var(--ease) infinite;
-  pointer-events:none; opacity:.4;
-}
-@keyframes skeleton-scan{ from{ transform: translateX(-100%);} to{ transform: translateX(200%);} }
+/* RANK (Top 10) : déjà présent en HTML via .card--ranked + .card__rank */
 
-/* Breakpoints page index */
-@media (min-width: 640px){
-  .hero{ min-height:70vh; }
-}
+/* BREAKPOINTS — ajustent la largeur de carte (exact Netflix feel) */
 @media (min-width: 480px){
-  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-sm), 1fr)); }
+  :root{ --tile-w: var(--tile-w-sm); }
 }
 @media (min-width: 640px){
-  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-md), 1fr)); }
+  :root{ --tile-w: var(--tile-w-md); }
 }
 @media (min-width: 1024px){
-  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-lg), 1fr)); }
+  :root{ --tile-w: var(--tile-w-lg); }
 }
 @media (min-width: 1280px){
-  .row__grid{ grid-template-columns: repeat(auto-fill, minmax(var(--poster-w-xl), 1fr)); }
+  :root{ --tile-w: var(--tile-w-xl); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero__media::after, .card, .card__media img, .row__grid > * { transition: none !important; animation: none !important; }
 }
