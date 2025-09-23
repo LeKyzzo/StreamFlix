@@ -2,32 +2,30 @@
    StreamFlix – GLOBAL
    - Reset, variables, thèmes
    - Header/nav, boutons, helpers
-   - Cartes génériques, footer
-   - Breakpoints globaux
-   Mobile-first • Aucune modif HTML requise
+   - Base carte (image directe)
+   - Footer
 ========================================================= */
 
-/* Reset minimal */
+/* Reset */
 *,
 *::before,
 *::after { box-sizing: border-box; }
-html, body { height: 100%; width: 100%; overflow-x: hidden;}
+html, body { height: 100%; }
 body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 img, picture, video, canvas { display: block; max-width: 100%; }
+figure { margin: 0; }
 button, input, select, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
 
-/* Variables + thèmes */
+/* Variables */
 :root {
-  /* Typo */
   --fs-0: clamp(.94rem, .88rem + .30vw, 1rem);
   --fs-1: clamp(1.10rem, .95rem + .70vw, 1.25rem);
   --fs-2: clamp(1.35rem, 1.05rem + 1.50vw, 1.6rem);
   --fs-3: clamp(1.70rem, 1.10rem + 2.50vw, 2.2rem);
   --fs-4: clamp(2.20rem, 1.20rem + 4.00vw, 3rem);
 
-  /* Espace */
   --space-1: .5rem;
   --space-2: .75rem;
   --space-3: 1rem;
@@ -35,35 +33,29 @@ a { color: inherit; text-decoration: none; }
   --space-5: 2rem;
   --space-6: 3rem;
 
-  /* Couleurs (dark) */
-  --bg: #0b0b0f;
-  --bg-elev: #0f1117;
-  --bg-muted: #12131a;
+  --bg: #141414;         /* Netflix-like */
+  --bg-elev: #181818;
+  --bg-muted: #0f0f0f;
   --text: #e6e6e9;
-  --text-muted: #a3a4ad;
-  --accent: #e50914;   /* rouge streaming */
-  --accent-2: #ffb703; /* focus/fx */
-  --card: #141822;
-  --border: #24283b;
+  --text-muted: #b3b3b3;
+  --accent: #e50914;
+  --accent-2: #ffb703;
 
-  /* Effets */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.15);
-  --shadow-md: 0 6px 18px rgba(0,0,0,.2);
-  --shadow-lg: 0 16px 40px rgba(0,0,0,.35);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.25);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.45);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,.6);
 
-  /* Layout */
   --max-w: 1400px;
   --header-h: 56px;
   --header-h-scrolled: 48px;
 
-  /* Largeur des posters (rails horizontaux) */
-  --tile-w: 72vw;     /* mobile ~2 visibles */
-  --tile-w-sm: 54vw;  /* ≥480px */
-  --tile-w-md: 36vw;  /* ≥640px */
-  --tile-w-lg: 24vw;  /* ≥1024px */
-  --tile-w-xl: 19vw;  /* ≥1280px */
+  /* largeur des posters (rails horizontaux 16:9) */
+  --tile-w: 72vw;
+  --tile-w-sm: 54vw;
+  --tile-w-md: 36vw;
+  --tile-w-lg: 24vw;
+  --tile-w-xl: 19vw;
 
-  /* Animations */
   --dur-fast: 120ms;
   --dur-mid: 260ms;
   --dur-slow: 480ms;
@@ -71,80 +63,108 @@ a { color: inherit; text-decoration: none; }
 }
 html[data-theme="light"]{
   --bg:#f9fafb; --bg-elev:#fff; --bg-muted:#f1f5f9;
-  --text:#0b0b0f; --text-muted:#475569; --card:#fff; --border:#e5e7eb;
+  --text:#0b0b0f; --text-muted:#475569;
 }
 html[data-theme="sepia"]{
   --bg:#0b0a09; --bg-elev:#14110f; --bg-muted:#1a1613;
   --text:#f2e8d5; --text-muted:#cbb69a; --accent:#d97706; --accent-2:#f59e0b;
-  --card:#1a1613; --border:#2a241f;
 }
 
-/* Helpers / Layout */
+/* Helpers */
 .container { width: min(100% - 2rem, var(--max-w)); margin-inline: auto; }
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 .page { background: var(--bg); color: var(--text); }
 
-/* Header sticky (look Netflix) */
+/* Header */
 .site-header{
   position: sticky; top:0; z-index:50;
   height: var(--header-h);
   display:grid; align-items:center;
-  background: linear-gradient(180deg, rgba(0,0,0,.75), rgba(0,0,0,.2) 60%, rgba(0,0,0,0));
-  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.35) 60%, rgba(0,0,0,0));
   transition: height var(--dur-mid) var(--ease), background var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease);
 }
 .page.is-scrolled .site-header, .site-header.is-collapsed {
-  height: var(--header-h-scrolled); background: rgba(0,0,0,.65); box-shadow: var(--shadow-sm);
+  height: var(--header-h-scrolled); background: rgba(0,0,0,.85); box-shadow: var(--shadow-sm);
 }
 .header__inner{
-  display:grid; grid-template-columns:auto 1fr auto; gap:var(--space-2); align-items:center;
+  display:grid; grid-template-columns:auto 1fr auto; gap:1rem; align-items:center;
 }
-.brand{ display:inline-flex; align-items:center; gap:.5rem; font-weight:800; letter-spacing:.3px; }
-.brand__mark{ color:var(--accent); font-size:1.1rem; transform: translateY(-1px); }
-.brand__name{ font-family: Unbounded, Inter, sans-serif; font-size:1.1rem; text-transform:uppercase; }
+.brand{ display:inline-flex; align-items:center; gap:.5rem; font-weight:900; letter-spacing:.3px; }
+.brand__mark{ color:var(--accent); font-size:1.15rem; transform: translateY(-1px); }
+.brand__name{ font-family: Unbounded, Inter, sans-serif; font-size:1.15rem; text-transform:uppercase; color:#fff; }
 
-.nav{ display:none; gap:1rem; }
-.nav__link{ color:var(--text-muted); font-size:.95rem; transition: color var(--dur-fast) var(--ease); }
-.nav__link:hover, .nav__link.is-active{ color:var(--text); }
+.nav{ display:none; gap:1.25rem; }
+.nav__link{ color:#e5e5e5; opacity:.85; font-size:.97rem; transition: opacity var(--dur-fast) var(--ease); }
+.nav__link:hover, .nav__link.is-active{ opacity:1; }
 
 .header-actions{ display:inline-flex; align-items:center; gap:.5rem; }
-.search{ display:inline-flex; align-items:center; gap:.25rem; background:var(--bg-elev); border:1px solid var(--border); padding:.25rem .5rem; border-radius:.75rem; }
+.search{ display:inline-flex; align-items:center; gap:.25rem; background:var(--bg-elev); border:1px solid rgba(255,255,255,.1); padding:.25rem .5rem; border-radius:.4rem; }
 .search__input{ border:0; background:transparent; color:var(--text); width:10ch; }
 
-.btn{ cursor:pointer; border:1px solid transparent; border-radius:.75rem; padding:.6rem .9rem; font-weight:600; transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.btn{ cursor:pointer; border:1px solid transparent; border-radius:.35rem; padding:.55rem .85rem; font-weight:700; transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
 .btn:hover{ transform: translateY(-1px); }
 .btn:active{ transform: translateY(0); }
-.btn--primary{ background:var(--accent); color:#fff; box-shadow:var(--shadow-sm); }
+.btn--primary{ background:#fff; color:#000; box-shadow:var(--shadow-sm); }
 .btn--primary:hover{ box-shadow:var(--shadow-md); }
-.btn--ghost{ background: rgba(255,255,255,.06); border-color: var(--border); }
-.btn--icon{ background: var(--bg-elev); border-color: var(--border); padding:.5rem; }
+.btn--ghost{ background: rgba(255,255,255,.2); color:#fff; }
+.btn--icon{ background: var(--bg-elev); border:1px solid rgba(255,255,255,.1); padding:.5rem; }
 .icon{ display:inline-block; line-height:1; }
 
 .avatar{ padding:0; border:0; background:transparent; border-radius:999px; overflow:hidden; width:36px; height:36px; }
 .avatar img{ width:100%; height:100%; object-fit:cover; }
 .only-desktop{ display:none; }
 
-/* Styles de carte génériques (figure 16:9) */
+/* Base card — images directes, pas de “cases grises” */
 .card{
-  position:relative; border-radius:.6rem; overflow:hidden; background:var(--card); border:1px solid var(--border);
-  transform-origin:center; transition: transform var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease);
-  will-change: transform; perspective:800px;
+  position:relative;
+  display:block;
+  overflow:visible;       /* overlay dépasse légèrement si besoin */
+  transform-origin:center;
+  contain: layout paint;
 }
-.card__media img{ width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block; }
-.card:hover{ transform: translateY(-3px) rotateY(.6deg); box-shadow: var(--shadow-md); filter: saturate(1.05); }
-
-/* Barre de progression (Reprendre) */
-.card__progress{
-  position:absolute; left:2px; right:2px; bottom:2px; height:4px; border-radius:2px;
-  background: rgba(255,255,255,.15); overflow:hidden;
+.card__media img{
+  width:100%;
+  height:auto;
+  display:block;
+  aspect-ratio: 16/9;     /* override par 2/3 en Top10 dans index.css */
+  object-fit: cover;
+  border-radius: .6rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-mid) var(--ease), filter var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease);
 }
-.card__progress::after{ content:""; display:block; height:100%; width:var(--progress,0%); background: var(--accent); }
 
-/* Classement Top */
-.card--ranked .card__rank{
-  position:absolute; inset:auto auto .25rem .25rem; z-index:1;
-  font-weight:800; font-size: 2rem; line-height:1;
-  -webkit-text-stroke:6px rgba(0,0,0,.55); text-shadow:0 2px 12px rgba(0,0,0,.7);
+/* Overlay hover (lecture, +, like) */
+.card__overlay{
+  pointer-events: none;
+  position:absolute; inset:0;
+  border-radius:.6rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.65) 100%);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
+}
+.card__actions{
+  position:absolute; inset:auto 0 .5rem 0;
+  display:flex; gap:.5rem; align-items:center; justify-content:center;
+  pointer-events: auto;
+}
+.card .round{
+  width:40px; height:40px; border-radius:999px;
+  border:0; background:#fff; color:#000; font-weight:900; display:grid; place-items:center;
+  box-shadow: var(--shadow-sm);
+}
+.card .round + .round{ background: rgba(255,255,255,.85); }
+.card .chip{
+  color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:.35rem; padding:.1rem .4rem; font-size:.8rem; margin-right:.25rem; background: rgba(255,255,255,.12);
+}
+
+/* Effet hover principal */
+.card:hover .card__media img{
+  transform: scale(1.05);
+  filter: saturate(1.06) brightness(1.02);
+  box-shadow: var(--shadow-md);
+}
+.card:hover .card__overlay{
+  opacity: 1; transform: translateY(0);
 }
 
 /* Footer */

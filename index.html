@@ -5,19 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StreamFlix — Accueil</title>
   <meta name="description" content="StreamFlix — Accueil. UI streaming moderne, HTML/CSS only, prête pour API." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Unbounded:wght@700&display=swap" rel="stylesheet">
 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+
+  <!-- CSS séparés -->
   <link rel="stylesheet" href="./style/global.css" />
   <link rel="stylesheet" href="./style/index.css" />
 </head>
 <body class="page page--home">
+  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="container header__inner">
       <a class="brand" href="./index.html" aria-label="Accueil StreamFlix">
         <span class="brand__mark">●</span>
         <span class="brand__name">StreamFlix</span>
       </a>
+
       <nav class="nav" role="navigation" aria-label="Navigation principale">
         <a class="nav__link is-active" href="#">Accueil</a>
         <a class="nav__link" href="#">Séries</a>
@@ -25,16 +29,13 @@
         <a class="nav__link" href="#">Nouveautés</a>
         <a class="nav__link" href="#">Ma liste</a>
       </nav>
+
       <div class="header-actions">
         <form class="search" role="search" aria-label="Rechercher" action="#" method="get">
           <input class="search__input" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher un titre" />
-          <button class="btn btn--icon" type="submit" aria-label="Rechercher">
-            <span class="icon">🔍</span>
-          </button>
+          <button class="btn btn--icon" type="submit" aria-label="Rechercher"><span class="icon">🔍</span></button>
         </form>
-        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme">
-          <span class="icon">🌓</span>
-        </button>
+        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme"><span class="icon">🌓</span></button>
         <button class="avatar" aria-haspopup="menu" aria-label="Profil">
           <img src="https://picsum.photos/seed/user/80/80" alt="" />
         </button>
@@ -42,19 +43,13 @@
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="hero" aria-label="Mise en avant">
-    <div class="hero__media" style="--hero-img:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=2000&auto=format&fit=crop');">
-      <div class="hero__gradient"></div>
-    </div>
+    <div class="hero__media" style="--hero-img:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=2000&auto=format&fit=crop');"></div>
     <div class="container hero__content">
-      <h1 class="hero__title">
-        <span class="badge">Top 10</span>
-        The Night Wanderer
-      </h1>
+      <h1 class="hero__title"><span class="badge">Top 10</span>The Night Wanderer</h1>
       <p class="hero__meta">2024 • 16+ • 1 saison • Thriller</p>
-      <p class="hero__desc">
-        Un détective insomniaque traque un énigmatique justicier nocturne dans une ville où chaque ombre cache un secret.
-      </p>
+      <p class="hero__desc">Un détective insomniaque traque un justicier nocturne dans une ville où chaque ombre cache un secret.</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="./html/movie.html?id=tnw" data-movie-id="tnw">▶️ Lecture</a>
         <a class="btn btn--ghost" href="./html/movie.html?id=tnw" data-movie-id="tnw">ℹ️ Plus d’infos</a>
@@ -63,99 +58,87 @@
   </section>
 
   <main class="page__content" id="main" role="main">
-    <div class="skeleton-mask" aria-hidden="true"></div>
-
-    <section class="row" aria-label="Reprendre la lecture">
-      <div class="container row__head">
-        <h2 class="row__title">Reprendre la lecture</h2>
-        <a class="row__cta" href="#">Tout voir</a>
-      </div>
-      <div class="container row__grid" data-row="continue">
-        <a class="card" href="./html/movie.html?id=alpha" data-movie-id="alpha">
-          <figure class="card__media">
-            <picture>
-              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/alpha-lg/800/450">
-              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/alpha-md/600/338">
-              <img src="https://picsum.photos/seed/alpha-sm/420/236" alt="Alpha — visuel" loading="lazy" />
-            </picture>
-            <figcaption class="sr-only">Alpha</figcaption>
-          </figure>
-          <div class="card__progress" style="--progress:62%"></div>
-        </a>
-
-        <a class="card" href="./html/movie.html?id=beta" data-movie-id="beta">
-          <figure class="card__media">
-            <picture>
-              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/beta-lg/800/450">
-              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/beta-md/600/338">
-              <img src="https://picsum.photos/seed/beta-sm/420/236" alt="Beta — visuel" loading="lazy" />
-            </picture>
-            <figcaption class="sr-only">Beta</figcaption>
-          </figure>
-          <div class="card__progress" style="--progress:35%"></div>
-        </a>
-
-        <a class="card" href="./html/movie.html?id=gamma" data-movie-id="gamma">
-          <figure class="card__media">
-            <picture>
-              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/gamma-lg/800/450">
-              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/gamma-md/600/338">
-              <img src="https://picsum.photos/seed/gamma-sm/420/236" alt="Gamma — visuel" loading="lazy" />
-            </picture>
-            <figcaption class="sr-only">Gamma</figcaption>
-          </figure>
-          <div class="card__progress" style="--progress:78%"></div>
-        </a>
-
-        <a class="card" href="./html/movie.html?id=delta" data-movie-id="delta">
-          <figure class="card__media">
-            <picture>
-              <source media="(min-width: 1024px)" srcset="https://picsum.photos/seed/delta-lg/800/450">
-              <source media="(min-width: 640px)" srcset="https://picsum.photos/seed/delta-md/600/338">
-              <img src="https://picsum.photos/seed/delta-sm/420/236" alt="Delta — visuel" loading="lazy" />
-            </picture>
-            <figcaption class="sr-only">Delta</figcaption>
-          </figure>
-          <div class="card__progress" style="--progress:12%"></div>
-        </a>
-      </div>
-    </section>
-
+    <!-- Trending Now (16:9) -->
     <section class="row" aria-label="Tendance maintenant">
       <div class="container row__head">
         <h2 class="row__title">Tendance maintenant</h2>
         <a class="row__cta" href="#">Tout voir</a>
       </div>
+
       <div class="container row__grid" data-row="trending">
-        <a class="card card--ranked" href="./html/movie.html?id=tnw" data-movie-id="tnw" style="--rank:1">
-          <figure class="card__media"><img src="https://picsum.photos/seed/tnw/420/236" alt="The Night Wanderer — visuel" loading="lazy" /></figure>
-          <span class="card__rank" aria-hidden="true">1</span>
+        <!-- CARD = image directe + overlay hover (pas de fond gris) -->
+        <a class="card" href="./html/movie.html?id=irishman" data-movie-id="irishman">
+          <figure class="card__media">
+            <img src="https://picsum.photos/seed/irishman/800/450" alt="The Irishman" loading="lazy" />
+          </figure>
+          <div class="card__overlay">
+            <div class="card__actions">
+              <span class="chip">HD</span>
+              <button class="round" aria-label="Lecture">▶</button>
+              <button class="round" aria-label="Ajouter à ma liste">＋</button>
+              <button class="round" aria-label="J’aime">❤</button>
+            </div>
+          </div>
         </a>
-        <a class="card card--ranked" href="./html/movie.html?id=echo" data-movie-id="echo" style="--rank:2">
-          <figure class="card__media"><img src="https://picsum.photos/seed/echo/420/236" alt="Echo — visuel" loading="lazy" /></figure>
-          <span class="card__rank" aria-hidden="true">2</span>
+
+        <a class="card" href="./html/movie.html?id=crown" data-movie-id="crown">
+          <figure class="card__media"><img src="https://picsum.photos/seed/crown/800/450" alt="The Crown" loading="lazy" /></figure>
+          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
         </a>
-        <a class="card card--ranked" href="./html/movie.html?id=flare" data-movie-id="flare" style="--rank:3">
-          <figure class="card__media"><img src="https://picsum.photos/seed/flare/420/236" alt="Flare — visuel" loading="lazy" /></figure>
-          <span class="card__rank" aria-hidden="true">3</span>
+
+        <a class="card" href="./html/movie.html?id=cobra" data-movie-id="cobra">
+          <figure class="card__media"><img src="https://picsum.photos/seed/cobra/800/450" alt="Cobra Kai" loading="lazy" /></figure>
+          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
         </a>
-        <a class="card" href="./html/movie.html?id=ionic" data-movie-id="ionic"><figure class="card__media"><img src="https://picsum.photos/seed/ionic/420/236" alt="Ionic — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=jade" data-movie-id="jade"><figure class="card__media"><img src="https://picsum.photos/seed/jade/420/236" alt="Jade — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=kite" data-movie-id="kite"><figure class="card__media"><img src="https://picsum.photos/seed/kite/420/236" alt="Kite — visuel" loading="lazy" /></figure></a>
+
+        <a class="card" href="./html/movie.html?id=shameless" data-movie-id="shameless">
+          <figure class="card__media"><img src="https://picsum.photos/seed/shameless/800/450" alt="Shameless" loading="lazy" /></figure>
+          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
+        </a>
+
+        <a class="card" href="./html/movie.html?id=lastdance" data-movie-id="lastdance">
+          <figure class="card__media"><img src="https://picsum.photos/seed/lastdance/800/450" alt="The Last Dance" loading="lazy" /></figure>
+          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
+        </a>
       </div>
     </section>
 
+    <!-- Top 10 Today (jaquettes 2:3 + gros numéros outline) -->
+    <section class="row" aria-label="Top 10 aujourd’hui">
+      <div class="container row__head">
+        <h2 class="row__title">Top 10 aujourd’hui</h2>
+        <a class="row__cta" href="#">Tout voir</a>
+      </div>
+
+      <div class="container row__grid" data-row="top10">
+        <a class="card card--ranked" href="./html/movie.html?id=qg" data-movie-id="qg">
+            <span class="card__rank">1</span>
+            <figure class="card__media"><img src="https://picsum.photos/seed/qg/400/600" alt="The Queen's Gambit" loading="lazy" /></figure>
+            <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
+        </a>
+
+        <a class="card card--ranked" href="./html/movie.html?id=impossible"><span class="card__rank">2</span><figure class="card__media"><img src="https://picsum.photos/seed/impossible/400/600" alt="The Impossible" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+
+        <a class="card card--ranked" href="./html/movie.html?id=chappelle"><span class="card__rank">3</span><figure class="card__media"><img src="https://picsum.photos/seed/chappelle/400/600" alt="Chappelle's Show" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+
+        <a class="card card--ranked" href="./html/movie.html?id=opxmas"><span class="card__rank">4</span><figure class="card__media"><img src="https://picsum.photos/seed/opxmas/400/600" alt="Operation Christmas Drop" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+
+        <a class="card card--ranked" href="./html/movie.html?id=mile22"><span class="card__rank">5</span><figure class="card__media"><img src="https://picsum.photos/seed/mile22/400/600" alt="Mile 22" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+      </div>
+    </section>
+
+    <!-- Ma liste -->
     <section class="row" aria-label="Ma liste">
       <div class="container row__head">
         <h2 class="row__title">Ma liste</h2>
         <a class="row__cta" href="#">Gérer</a>
       </div>
       <div class="container row__grid" data-row="mylist">
-        <a class="card" href="./html/movie.html?id=loom" data-movie-id="loom"><figure class="card__media"><img src="https://picsum.photos/seed/loom/420/236" alt="Loom — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=maze" data-movie-id="maze"><figure class="card__media"><img src="https://picsum.photos/seed/maze/420/236" alt="Maze — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=nova" data-movie-id="nova"><figure class="card__media"><img src="https://picsum.photos/seed/nova/420/236" alt="Nova — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=onyx" data-movie-id="onyx"><figure class="card__media"><img src="https://picsum.photos/seed/onyx/420/236" alt="Onyx — visuel" loading="lazy" /></figure></a>
-        <a class="card" href="./html/movie.html?id=pulse" data-movie-id="pulse"><figure class="card__media"><img src="https://picsum.photos/seed/pulse/420/236" alt="Pulse — visuel" loading="lazy" /></figure></a>
+        <a class="card" href="./html/movie.html?id=loom"><figure class="card__media"><img src="https://picsum.photos/seed/loom/800/450" alt="Loom" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+        <a class="card" href="./html/movie.html?id=maze"><figure class="card__media"><img src="https://picsum.photos/seed/maze/800/450" alt="Maze" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+        <a class="card" href="./html/movie.html?id=nova"><figure class="card__media"><img src="https://picsum.photos/seed/nova/800/450" alt="Nova" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">4K</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+        <a class="card" href="./html/movie.html?id=onyx"><figure class="card__media"><img src="https://picsum.photos/seed/onyx/800/450" alt="Onyx" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
+        <a class="card" href="./html/movie.html?id=pulse"><figure class="card__media"><img src="https://picsum.photos/seed/pulse/800/450" alt="Pulse" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
       </div>
     </section>
   </main>
