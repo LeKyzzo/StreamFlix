@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StreamFlix — Détails du titre</title>
+  <meta name="description" content="StreamFlix — Page détail d’un titre. HTML/CSS only, hooks prêts pour API." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/global.css" />
+  <link rel="stylesheet" href="../style/movie.css" />
+</head>
+<body class="page page--detail">
+  <header class="site-header">
+    <div class="container header__inner">
+      <a class="brand" href="../index.html" aria-label="Accueil StreamFlix">
+        <span class="brand__mark">●</span>
+        <span class="brand__name">StreamFlix</span>
+      </a>
+      <nav class="nav">
+        <a class="nav__link" href="../index.html">Accueil</a>
+        <a class="nav__link" href="#">Séries</a>
+        <a class="nav__link" href="#">Films</a>
+        <a class="nav__link" href="#">Nouveautés</a>
+        <a class="nav__link" href="#">Ma liste</a>
+      </nav>
+      <div class="header-actions">
+        <form class="search" role="search" action="#" method="get">
+          <input class="search__input" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher un titre" />
+          <button class="btn btn--icon" type="submit" aria-label="Rechercher"><span class="icon">🔍</span></button>
+        </form>
+        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme"><span class="icon">🌓</span></button>
+        <button class="avatar" aria-haspopup="menu" aria-label="Profil">
+          <img src="https://picsum.photos/seed/user/80/80" alt="" />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="detail-hero" aria-label="Bannière du titre" style="--backdrop:url('https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=2000&auto=format&fit=crop');">
+    <div class="detail-hero__overlay"></div>
+    <div class="container detail-hero__content" data-movie-id="tnw">
+      <h1 class="detail__title">The Night Wanderer</h1>
+      <p class="detail__meta">2024 • 16+ • 1 saison • Thriller • 4K • Dolby Vision</p>
+      <div class="detail__actions">
+        <a class="btn btn--primary" href="#" aria-label="Lecture">▶️ Lecture</a>
+        <a class="btn btn--ghost" href="#" aria-label="Ajouter à ma liste">＋ Ma liste</a>
+        <a class="btn btn--ghost" href="#" aria-label="Télécharger">⬇️ Télécharger</a>
+      </div>
+      <p class="detail__desc">
+        Au cœur d’une mégalopole crépusculaire, un inspecteur aux prises avec ses démons poursuit un justicier insaisissable.
+        Chaque épisode dévoile une strate plus profonde de la conspiration.
+      </p>
+      <ul class="detail__tags" aria-label="Genres">
+        <li>Suspense</li><li>Noir</li><li>Action</li><li>Psychologique</li>
+      </ul>
+    </div>
+  </section>
+
+  <main class="page__content" role="main">
+    <section class="container detail-grid">
+      <article class="panel">
+        <h2 class="panel__title">Épisodes</h2>
+        <div class="episodes">
+          <article class="episode" data-episode="1">
+            <div class="episode__thumb"><img src="https://picsum.photos/seed/ep1/640/360" alt="Épisode 1" loading="lazy" /></div>
+            <div class="episode__body">
+              <header class="episode__head">
+                <h3 class="episode__title">1. Les veilles</h3>
+                <span class="episode__durée">52 min</span>
+              </header>
+              <p class="episode__desc">Une série d’incidents nocturnes mène l’enquête vers un mystérieux vagabond…</p>
+            </div>
+          </article>
+
+          <article class="episode" data-episode="2">
+            <div class="episode__thumb"><img src="https://picsum.photos/seed/ep2/640/360" alt="Épisode 2" loading="lazy" /></div>
+            <div class="episode__body">
+              <header class="episode__head">
+                <h3 class="episode__title">2. Heures mortes</h3>
+                <span class="episode__durée">49 min</span>
+              </header>
+              <p class="episode__desc">Des pistes contradictoires fissurent les certitudes de l’inspecteur.</p>
+            </div>
+          </article>
+        </div>
+      </article>
+
+      <aside class="panel">
+        <h2 class="panel__title">Distribution</h2>
+        <ul class="cast">
+          <li class="cast__item"><img src="https://picsum.photos/seed/cast1/96/96" alt="" /><div><strong>A. Dubois</strong><br><span>Inspecteur Marek</span></div></li>
+          <li class="cast__item"><img src="https://picsum.photos/seed/cast2/96/96" alt="" /><div><strong>L. Kim</strong><br><span>Le Vagabond</span></div></li>
+          <li class="cast__item"><img src="https://picsum.photos/seed/cast3/96/96" alt="" /><div><strong>S. Rivera</strong><br><span>Capitaine Néra</span></div></li>
+        </ul>
+
+        <h2 class="panel__title">Détails</h2>
+        <dl class="details">
+          <div><dt>Année</dt><dd>2024</dd></div>
+          <div><dt>Âge</dt><dd>16+</dd></div>
+          <div><dt>Qualité</dt><dd>4K, Dolby Vision</dd></div>
+          <div><dt>Audio</dt><dd>FR, EN, ES</dd></div>
+          <div><dt>ST</dt><dd>FR, EN</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="row" aria-label="Titres similaires">
+      <div class="container row__head">
+        <h2 class="row__title">Titres similaires</h2>
+        <a class="row__cta" href="#">Tout voir</a>
+      </div>
+      <div class="container row__grid" data-row="similar">
+        <a class="card" href="./movie.html?id=echo"><figure class="card__media"><img src="https://picsum.photos/seed/sim1/420/236" alt="Echo" loading="lazy"/></figure></a>
+        <a class="card" href="./movie.html?id=flare"><figure class="card__media"><img src="https://picsum.photos/seed/sim2/420/236" alt="Flare" loading="lazy"/></figure></a>
+        <a class="card" href="./movie.html?id=ionic"><figure class="card__media"><img src="https://picsum.photos/seed/sim3/420/236" alt="Ionic" loading="lazy"/></figure></a>
+        <a class="card" href="./movie.html?id=kite"><figure class="card__media"><img src="https://picsum.photos/seed/sim4/420/236" alt="Kite" loading="lazy"/></figure></a>
+        <a class="card" href="./movie.html?id=loom"><figure class="card__media"><img src="https://picsum.photos/seed/sim5/420/236" alt="Loom" loading="lazy"/></figure></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <nav class="footer__nav">
+        <a href="#">Audio et sous-titres</a>
+        <a href="#">Presse</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">Nous contacter</a>
+      </nav>
+      <p class="footer__copy">© 2025 StreamFlix — Page détail prototype.</p>
+    </div>
+  </footer>
+</body>
+</html>
