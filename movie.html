@@ -87,6 +87,22 @@
                 <button
                   role="tab"
                   aria-selected="false"
+                  data-tab="cast"
+                  class="tab-btn"
+                >
+                  Distribution
+                </button>
+                <button
+                  role="tab"
+                  aria-selected="false"
+                  data-tab="videos"
+                  class="tab-btn"
+                >
+                  Vidéos
+                </button>
+                <button
+                  role="tab"
+                  aria-selected="false"
                   data-tab="details"
                   class="tab-btn"
                 >
@@ -96,6 +112,30 @@
               <div class="tab-panels">
                 <section id="tab-overview" class="tab-panel is-active">
                   <ul class="chips" id="movieGenres"></ul>
+                  <div class="overview-stats">
+                    <div class="stat-item">
+                      <span class="stat-label">Note</span>
+                      <span class="stat-value" id="movieRating">—</span>
+                    </div>
+                    <div class="stat-item">
+                      <span class="stat-label">Votes</span>
+                      <span class="stat-value" id="movieVotes">—</span>
+                    </div>
+                    <div class="stat-item">
+                      <span class="stat-label">Popularité</span>
+                      <span class="stat-value" id="moviePopularity">—</span>
+                    </div>
+                  </div>
+                </section>
+                <section id="tab-cast" class="tab-panel">
+                  <div class="cast-grid" id="castGrid">
+                    <div class="loading">Chargement...</div>
+                  </div>
+                </section>
+                <section id="tab-videos" class="tab-panel">
+                  <div class="videos-grid" id="videosGrid">
+                    <div class="loading">Chargement...</div>
+                  </div>
                 </section>
                 <section id="tab-details" class="tab-panel">
                   <dl class="metadata" id="movieDetails"></dl>
@@ -116,7 +156,7 @@
             class="grid movies landscape"
             data-collection="similar"
             data-skeleton="8"
-            data-skeleton-only="true"
+            data-skeleton-only="false"
           >
             <article class="movie-card">
               <a class="card-media-wrap" href="movie.html"
@@ -253,21 +293,23 @@
       <article class="movie-card appear" data-id="">
         <a class="card-media-wrap" href="movie.html">
           <div class="card-media">
-            <picture>
-              <source type="image/avif" srcset="" />
-              <source type="image/webp" srcset="" />
-              <img
-                class="card-img skeleton"
-                alt=""
-                loading="lazy"
-                width="320"
-                height="180"
-                sizes="(min-width:1440px) 280px, (min-width:960px) 240px, (min-width:720px) 220px, 34vw"
-              />
-            </picture>
+            <img
+              class="card-img skeleton"
+              alt=""
+              loading="lazy"
+              width="320"
+              height="180"
+              sizes="(min-width:1440px) 280px, (min-width:960px) 240px, (min-width:720px) 220px, 34vw"
+            />
             <div class="card-overlay">
-              <button class="btn circle play" aria-label="Lecture">▶</button>
-              <button class="btn circle like" aria-label="Like">❤</button>
+              <div class="overlay-inner">
+                <h4 class="overlay-title"></h4>
+                <p class="overlay-desc"></p>
+                <div class="overlay-actions">
+                  <button class="btn small primary" aria-label="Lecture">▶ Lecture</button>
+                  <button class="btn small ghost" aria-label="Like">❤</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-meta">

@@ -50,20 +50,50 @@
         <h1 class="section-title">Tous les films</h1>
       </div>
       <div class="container">
-        <div class="catalog-toolbar" role="search">
-          <input
-            id="catalogSearch"
-            type="search"
-            class="input"
-            placeholder="Rechercher un film…"
-            aria-label="Rechercher un film"
-          />
+        <div class="catalog-toolbar">
+          <div class="search-section" role="search">
+            <input
+              id="catalogSearch"
+              type="search"
+              class="input search-input"
+              placeholder="Rechercher un film…"
+              aria-label="Rechercher un film"
+            />
+          </div>
+          <div class="filters-section">
+            <select id="genreFilter" class="input" aria-label="Filtrer par genre">
+              <option value="">Tous les genres</option>
+            </select>
+            <select id="sortBy" class="input" aria-label="Trier par">
+              <option value="popularity.desc">Popularité (décroissant)</option>
+              <option value="popularity.asc">Popularité (croissant)</option>
+              <option value="release_date.desc">Date de sortie (récent)</option>
+              <option value="release_date.asc">Date de sortie (ancien)</option>
+              <option value="vote_average.desc">Note (meilleur)</option>
+              <option value="vote_average.asc">Note (pire)</option>
+              <option value="title.asc">Titre (A-Z)</option>
+              <option value="title.desc">Titre (Z-A)</option>
+            </select>
+            <select id="yearFilter" class="input" aria-label="Filtrer par année">
+              <option value="">Toutes les années</option>
+            </select>
+          </div>
         </div>
+        
+        <div class="results-info">
+          <span id="resultsCount">Chargement...</span>
+          <div class="pagination" id="pagination">
+            <button id="prevPage" class="btn ghost" disabled>← Précédent</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextPage" class="btn ghost">Suivant →</button>
+          </div>
+        </div>
+
         <div
           class="catalog-grid"
           data-catalog
-          data-skeleton="12"
-          data-skeleton-only="true"
+          data-skeleton="20"
+          data-skeleton-only="false"
         >
           <!-- Inline skeletons for instant paint -->
           <article class="movie-card">
@@ -170,18 +200,24 @@
       <article class="movie-card appear" data-id="">
         <a class="card-media-wrap" href="movie.html">
           <div class="card-media">
-            <picture>
-              <source type="image/avif" srcset="" />
-              <source type="image/webp" srcset="" />
-              <img
-                class="card-img skeleton"
-                alt=""
-                loading="lazy"
-                width="300"
-                height="450"
-                sizes="(min-width:1440px) 280px, (min-width:960px) 220px, (min-width:720px) 200px, 46vw"
-              />
-            </picture>
+            <img
+              class="card-img skeleton"
+              alt=""
+              loading="lazy"
+              width="300"
+              height="450"
+              sizes="(min-width:1440px) 280px, (min-width:960px) 220px, (min-width:720px) 200px, 46vw"
+            />
+            <div class="card-overlay">
+              <div class="overlay-inner">
+                <h4 class="overlay-title"></h4>
+                <p class="overlay-desc"></p>
+                <div class="overlay-actions">
+                  <button class="btn small primary" aria-label="Lecture">▶ Lecture</button>
+                  <button class="btn small ghost" aria-label="Like">❤</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="card-meta">
             <h3 class="card-title"></h3>

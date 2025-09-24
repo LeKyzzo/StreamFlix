@@ -4,7 +4,9 @@ import { TMDB_CONFIG } from "../config/tmdb-config.js";
 function getBearer() {
   try {
     return (
-      (typeof window !== "undefined" && (window.STREAMFLIX_BEARER || window.STREAMFLIX_V4_TOKEN)) || null
+      (typeof window !== "undefined" &&
+        (window.STREAMFLIX_BEARER || window.STREAMFLIX_V4_TOKEN)) ||
+      null
     );
   } catch (_) {
     return null;
@@ -37,7 +39,12 @@ async function fetchJson(url) {
       ...(bearer ? { Authorization: `Bearer ${bearer}` } : {}),
     },
   });
-  console.log("TMDB STATUS:", res.status, res.statusText, `(${Date.now() - start}ms)`);
+  console.log(
+    "TMDB STATUS:",
+    res.status,
+    res.statusText,
+    `(${Date.now() - start}ms)`
+  );
   if (!res.ok) {
     const body = await res.text().catch(() => "");
     console.error("TMDB ERROR BODY:", body);
@@ -56,6 +63,30 @@ export const tmdbApi = {
   },
   discoverMovies(page = 1, filters = {}) {
     const url = buildUrl("/discover/movie", { page, ...filters });
+    return fetchJson(url);
+  },
+  searchMovies(query, page = 1) {
+    const url = buildUrl("/search/movie", { query, page });
+    return fetchJson(url);
+  },
+  getMovieDetails(id) {
+    const url = buildUrl(`/movie/${id}`, { append_to_response: "credits,videos,images,similar" });
+    return fetchJson(url);
+  },
+  getMovieCredits(id) {
+    const url = buildUrl(`/movie/${id}/credits`);
+    return fetchJson(url);
+  },
+  getMovieVideos(id) {
+    const url = buildUrl(`/movie/${id}/videos`);
+    return fetchJson(url);
+  },
+  getSimilarMovies(id, page = 1) {
+    const url = buildUrl(`/movie/${id}/similar`, { page });
+    return fetchJson(url);
+  },
+  getMovieGenres() {
+    const url = buildUrl("/genre/movie/list");
     return fetchJson(url);
   },
 };

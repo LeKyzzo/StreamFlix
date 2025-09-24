@@ -45,7 +45,8 @@ function cardFromMovie(m) {
 
   // TMDB renvoie du JPG ; si le template contient <source>, on pointe vers le même JPG
   // (ou laissez-les vides si vous préférez). On garde un srcset 1x/2x pour la netteté.
-  img.src = poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
+  img.src =
+    poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
   img.srcset = poster342 && poster500 ? `${poster342} 1x, ${poster500} 2x` : "";
   if (webp) webp.srcset = img.srcset || poster342 || "";
   if (avif) avif.srcset = img.srcset || poster342 || "";
@@ -65,12 +66,12 @@ function cardFromMovie(m) {
   node.querySelector(".card-subtitle").textContent = year ? `${year}` : "";
 
   // Hover overlay content
-  const oTitle = node.querySelector('.overlay-title');
-  const oDesc = node.querySelector('.overlay-desc');
-  if (oTitle) oTitle.textContent = m.title || m.name || '';
+  const oTitle = node.querySelector(".overlay-title");
+  const oDesc = node.querySelector(".overlay-desc");
+  if (oTitle) oTitle.textContent = m.title || m.name || "";
   if (oDesc) {
-    const txt = (m.overview || '').trim();
-    oDesc.textContent = txt.length > 160 ? txt.slice(0, 157) + '…' : txt;
+    const txt = (m.overview || "").trim();
+    oDesc.textContent = txt.length > 160 ? txt.slice(0, 157) + "…" : txt;
   }
 
   return node;
@@ -139,7 +140,7 @@ async function renderCollection(grid) {
     });
   } catch (e) {
     // En cas d’erreur, on garde les skeletons et on log l'erreur
-    console.error('[Home] Échec de chargement', grid.dataset.collection, e);
+    console.error("[Home] Échec de chargement", grid.dataset.collection, e);
   }
 }
 
