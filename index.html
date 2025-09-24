@@ -35,7 +35,16 @@
           <input class="search__input" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher un titre" />
           <button class="btn btn--icon" type="submit" aria-label="Rechercher"><span class="icon">🔍</span></button>
         </form>
-        <button class="btn btn--icon only-desktop" aria-label="Changer de thème" data-action="toggle-theme"><span class="icon">🌓</span></button>
+
+        <!-- Toggle thème 100% HTML/CSS (remplace juste l’ancien bouton) -->
+        <input id="theme-switch" class="visually-hidden" type="checkbox" />
+        <label for="theme-switch"
+               class="btn btn--icon only-desktop theme-toggle"
+               aria-label="Basculer le thème"
+               title="Basculer le thème">
+          <span class="icon" aria-hidden="true"></span>
+        </label>
+
         <button class="avatar" aria-haspopup="menu" aria-label="Profil">
           <img src="https://picsum.photos/seed/user/80/80" alt="" />
         </button>
