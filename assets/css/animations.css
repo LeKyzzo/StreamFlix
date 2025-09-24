@@ -1,10 +1,25 @@
 /* animations.css - subtle parallax & utilities */
-.parallax-tilt{transform-style:preserve-3d;perspective:1000px}
-.parallax-tilt .poster-layer{transform:translateZ(0);transition:transform var(--dur-3) var(--ease-std), filter var(--dur-3)}
-.parallax-tilt:hover .layer-front{transform:translateZ(24px) rotateY(-3deg)}
-.parallax-tilt:hover .layer-mid{transform:translateZ(12px) rotateY(-2deg)}
-.parallax-tilt:hover .layer-back{transform:translateZ(6px) rotateY(-1deg)}
+.parallax-tilt {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.parallax-tilt .poster-layer {
+  transform: translateZ(0);
+  transition: transform var(--dur-3) var(--ease-std), filter var(--dur-3);
+}
+.parallax-tilt:hover .layer-front {
+  transform: translateZ(24px) rotateY(-3deg);
+}
+.parallax-tilt:hover .layer-mid {
+  transform: translateZ(12px) rotateY(-2deg);
+}
+.parallax-tilt:hover .layer-back {
+  transform: translateZ(6px) rotateY(-1deg);
+}
 
-@media (prefers-reduced-motion: reduce){
-  .parallax-tilt *{transition:none !important;transform:none !important}
+@media (prefers-reduced-motion: reduce) {
+  .parallax-tilt * {
+    transition: none !important;
+    transform: none !important;
+  }
 }

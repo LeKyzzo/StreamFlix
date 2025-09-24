@@ -1,25 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" data-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
     <title>StreamFlix — Film</title>
     <script>
       // Early theme apply (works even if modules don't load)
-      (function(){
-        try{ var t = localStorage.getItem('sf_theme'); if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){}
+      (function () {
+        try {
+          var t = localStorage.getItem("sf_theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/layout.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/animations.css" />
   </head>
   <body>
     <header class="site-header" data-sticky>
       <div class="container header-inner">
-        <a class="brand" href="index.html"><span class="brand-logo">S</span><span class="brand-text">StreamFlix</span></a>
+        <a class="brand" href="index.html"
+          ><span class="brand-logo">S</span
+          ><span class="brand-text">StreamFlix</span></a
+        >
         <nav class="main-nav">
           <a href="index.html#tendances" class="nav-link">Accueil</a>
           <a href="index.html#populaire" class="nav-link">Populaire</a>
@@ -27,7 +36,13 @@
           <a href="browse.html" class="nav-link">Voir tous les films</a>
         </nav>
         <div class="header-actions">
-          <button id="theme-toggle" class="btn ghost" aria-label="Changer le thème"><span class="icon">🌓</span></button>
+          <button
+            id="theme-toggle"
+            class="btn ghost"
+            aria-label="Changer le thème"
+          >
+            <span class="icon">🌓</span>
+          </button>
         </div>
       </div>
     </header>
@@ -35,7 +50,11 @@
     <main id="main">
       <section class="movie-hero">
         <div class="container movie-hero-grid">
-          <div class="movie-poster skeleton" id="moviePoster" aria-label="Affiche du film"></div>
+          <div
+            class="movie-poster skeleton"
+            id="moviePoster"
+            aria-label="Affiche du film"
+          ></div>
           <div class="movie-details">
             <nav class="breadcrumb" aria-label="Fil d'ariane">
               <a href="index.html">Accueil</a>
@@ -57,8 +76,22 @@
 
             <div class="tabs" data-tabs>
               <div class="tabs-list" role="tablist">
-                <button role="tab" aria-selected="true" data-tab="overview" class="tab-btn">Aperçu</button>
-                <button role="tab" aria-selected="false" data-tab="details" class="tab-btn">Détails</button>
+                <button
+                  role="tab"
+                  aria-selected="true"
+                  data-tab="overview"
+                  class="tab-btn"
+                >
+                  Aperçu
+                </button>
+                <button
+                  role="tab"
+                  aria-selected="false"
+                  data-tab="details"
+                  class="tab-btn"
+                >
+                  Détails
+                </button>
               </div>
               <div class="tab-panels">
                 <section id="tab-overview" class="tab-panel is-active">
@@ -75,40 +108,135 @@
       </section>
 
       <section class="section">
-        <div class="container section-header"><h2 class="section-title">Similaires</h2></div>
+        <div class="container section-header">
+          <h2 class="section-title">Similaires</h2>
+        </div>
         <div class="container">
-          <div class="grid movies landscape" data-collection="similar" data-skeleton="8" data-skeleton-only="true">
+          <div
+            class="grid movies landscape"
+            data-collection="similar"
+            data-skeleton="8"
+            data-skeleton-only="true"
+          >
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
             <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
-              <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+              <a class="card-media-wrap" href="movie.html"
+                ><div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div></a
+              >
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
             </article>
           </div>
         </div>
@@ -128,7 +256,14 @@
             <picture>
               <source type="image/avif" srcset="" />
               <source type="image/webp" srcset="" />
-              <img class="card-img skeleton" alt="" loading="lazy" width="320" height="180" sizes="(min-width:1440px) 280px, (min-width:960px) 240px, (min-width:720px) 220px, 34vw" />
+              <img
+                class="card-img skeleton"
+                alt=""
+                loading="lazy"
+                width="320"
+                height="180"
+                sizes="(min-width:1440px) 280px, (min-width:960px) 240px, (min-width:720px) 220px, 34vw"
+              />
             </picture>
             <div class="card-overlay">
               <button class="btn circle play" aria-label="Lecture">▶</button>
@@ -140,34 +275,42 @@
             <p class="card-subtitle"></p>
           </div>
         </a>
-        <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+        <button
+          class="card-action btn icon-only"
+          aria-label="Ajouter à la liste"
+        >
+          ＋
+        </button>
       </article>
     </template>
 
     <script>
       // Fallback theme toggle (if modules fail)
-      (function(){
-        if(window.__sfThemeBound) return;
-        var THEMES=['dark','light','cinema'];
-        function applyTheme(name){
-          if(THEMES.indexOf(name)<0) name='dark';
-          document.documentElement.setAttribute('data-theme', name);
-          try{localStorage.setItem('sf_theme', name);}catch(e){}
+      (function () {
+        if (window.__sfThemeBound) return;
+        var THEMES = ["dark", "light", "cinema"];
+        function applyTheme(name) {
+          if (THEMES.indexOf(name) < 0) name = "dark";
+          document.documentElement.setAttribute("data-theme", name);
+          try {
+            localStorage.setItem("sf_theme", name);
+          } catch (e) {}
         }
-        var btn=document.getElementById('theme-toggle');
-        if(btn){
-          btn.addEventListener('click', function(){
-            var cur=document.documentElement.getAttribute('data-theme')||'dark';
-            var next=THEMES[(THEMES.indexOf(cur)+1)%THEMES.length];
+        var btn = document.getElementById("theme-toggle");
+        if (btn) {
+          btn.addEventListener("click", function () {
+            var cur =
+              document.documentElement.getAttribute("data-theme") || "dark";
+            var next = THEMES[(THEMES.indexOf(cur) + 1) % THEMES.length];
             applyTheme(next);
           });
         }
-        window.__sfThemeBound=true;
+        window.__sfThemeBound = true;
       })();
-  </script>
-  <script src="assets/js/config.js"></script>
+    </script>
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/theme-toggle.js"></script>
-  <script src="assets/js/nav.js"></script>
+    <script src="assets/js/nav.js"></script>
     <script type="module" src="assets/js/pages/movie.js"></script>
   </body>
 </html>
