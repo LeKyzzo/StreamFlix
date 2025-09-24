@@ -102,9 +102,51 @@
   backdrop-filter: blur(4px);
 }
 
-/* Hover overlay removed (per latest request) */
+/* Hover overlay with description */
 .card-overlay {
-  display: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: stretch;
+  padding: 0.6rem 0.75rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-std);
+  pointer-events: none; /* buttons inside will re-enable */
+}
+.movie-card:hover .card-overlay,
+.movie-card:focus-within .card-overlay {
+  opacity: 1;
+}
+.card-overlay .overlay-inner {
+  display: grid;
+  gap: 0.25rem;
+  width: 100%;
+}
+.card-overlay .overlay-title {
+  font-size: var(--fs-300);
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.card-overlay .overlay-desc {
+  font-size: var(--fs-200);
+  color: #ddd;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-overlay .overlay-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.card-overlay .btn {
+  pointer-events: auto;
 }
 
 /* Hover widen effect */
