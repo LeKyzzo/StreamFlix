@@ -1,26 +1,26 @@
 // browse.js - TMDB-powered movie catalog with search, filters, and pagination
-import { qs, qsa, el } from '../utils/dom.js';
-import { tmdbApi } from '../services/tmdb-service.js';
-import { buildImageUrl, TMDB_CONFIG } from '../config/tmdb-config.js';
+import { qs, qsa, el } from "../utils/dom.js";
+import { tmdbApi } from "../services/tmdb-service.js";
+import { buildImageUrl, TMDB_CONFIG } from "../config/tmdb-config.js";
 
 let currentPage = 1;
-let currentQuery = '';
-let currentGenre = '';
-let currentSort = 'popularity.desc';
-let currentYear = '';
+let currentQuery = "";
+let currentGenre = "";
+let currentSort = "popularity.desc";
+let currentYear = "";
 let totalPages = 1;
 let genres = [];
 
 function skeletonCard() {
-  const article = el('article', 'movie-card');
-  const link = el('a', 'card-media-wrap');
-  link.href = 'movie.html';
-  const media = el('div', 'card-media skeleton');
-  const meta = el('div', 'card-meta');
-  const title = el('h3', 'card-title');
-  title.textContent = '\u200b';
-  const sub = el('p', 'card-subtitle');
-  sub.textContent = '\u200b';
+  const article = el("article", "movie-card");
+  const link = el("a", "card-media-wrap");
+  link.href = "movie.html";
+  const media = el("div", "card-media skeleton");
+  const meta = el("div", "card-meta");
+  const title = el("h3", "card-title");
+  title.textContent = "\u200b";
+  const sub = el("p", "card-subtitle");
+  sub.textContent = "\u200b";
   meta.append(title, sub);
   link.append(media, meta);
   article.append(link);
@@ -28,40 +28,59 @@ function skeletonCard() {
 }
 
 function cardFromMovie(m) {
-  const tpl = qs('#movie-card-template');
+  const tpl = qs("#movie-card-template");
   const node = tpl.content.firstElementChild.cloneNode(true);
   node.dataset.id = m.id;
-  
-  const a = node.querySelector('a.card-media-wrap');
+
+  const a = node.querySelector("a.card-media-wrap");
   a.href = `movie.html?id=${m.id}`;
-  
-  const poster342 = buildImageUrl(m.poster_path, TMDB_CONFIG.IMAGE_SIZES.POSTER.MEDIUM);
-  const poster500 = buildImageUrl(m.poster_path, TMDB_CONFIG.IMAGE_SIZES.POSTER.LARGE);
-  
-  const img = node.querySelector('img.card-img');
-  img.src = poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
+
+  const poster342 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.IMAGE_SIZES.POSTER.MEDIUM
+  );
+  const poster500 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.IMAGE_SIZES.POSTER.LARGE
+  );
+
+  const img = node.querySelector("img.card-img");
+  img.src =
+    poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
   img.srcset = poster342 && poster500 ? `${poster342} 1x, ${poster500} 2x` : "";
-  img.alt = `Affiche de ${m.title || m.name || 'film'}`;
-  
-  img.addEventListener('load', () => {
-    img.classList.remove('skeleton');
-    img.style.opacity = '1';
-  }, { once: true });
-  
-  node.querySelector('.card-title').textContent = m.title || m.name || 'Sans titre';
-  const year = (m.release_date || m.first_air_date || '').slice(0, 4);
-  const genreNames = m.genre_ids?.map(id => genres.find(g => g.id === id)?.name).filter(Boolean).slice(0, 2).join(', ') || '';
-  node.querySelector('.card-subtitle').textContent = [year, genreNames].filter(Boolean).join(' • ');
-  
+  img.alt = `Affiche de ${m.title || m.name || "film"}`;
+
+  img.addEventListener(
+    "load",
+    () => {
+      img.classList.remove("skeleton");
+      img.style.opacity = "1";
+    },
+    { once: true }
+  );
+
+  node.querySelector(".card-title").textContent =
+    m.title || m.name || "Sans titre";
+  const year = (m.release_date || m.first_air_date || "").slice(0, 4);
+  const genreNames =
+    m.genre_ids
+      ?.map((id) => genres.find((g) => g.id === id)?.name)
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(", ") || "";
+  node.querySelector(".card-subtitle").textContent = [year, genreNames]
+    .filter(Boolean)
+    .join(" • ");
+
   // Hover overlay content
-  const oTitle = node.querySelector('.overlay-title');
-  const oDesc = node.querySelector('.overlay-desc');
-  if (oTitle) oTitle.textContent = m.title || m.name || '';
+  const oTitle = node.querySelector(".overlay-title");
+  const oDesc = node.querySelector(".overlay-desc");
+  if (oTitle) oTitle.textContent = m.title || m.name || "";
   if (oDesc) {
-    const txt = (m.overview || '').trim();
-    oDesc.textContent = txt.length > 160 ? txt.slice(0, 157) + '…' : txt;
+    const txt = (m.overview || "").trim();
+    oDesc.textContent = txt.length > 160 ? txt.slice(0, 157) + "…" : txt;
   }
-  
+
   return node;
 }
 
@@ -69,25 +88,25 @@ async function loadGenres() {
   try {
     const response = await tmdbApi.getMovieGenres();
     genres = response.genres || [];
-    
-    const genreSelect = qs('#genreFilter');
-    genres.forEach(genre => {
-      const option = el('option');
+
+    const genreSelect = qs("#genreFilter");
+    genres.forEach((genre) => {
+      const option = el("option");
       option.value = genre.id;
       option.textContent = genre.name;
       genreSelect.append(option);
     });
   } catch (error) {
-    console.error('[Browse] Erreur chargement genres:', error);
+    console.error("[Browse] Erreur chargement genres:", error);
   }
 }
 
 function populateYearFilter() {
-  const yearSelect = qs('#yearFilter');
+  const yearSelect = qs("#yearFilter");
   const currentYear = new Date().getFullYear();
-  
+
   for (let year = currentYear; year >= 1980; year--) {
-    const option = el('option');
+    const option = el("option");
     option.value = year;
     option.textContent = year;
     yearSelect.append(option);
@@ -103,21 +122,21 @@ async function discoverMovies(page = 1, filters = {}) {
 }
 
 async function fetchMovies(page = 1) {
-  const grid = qs('[data-catalog]');
-  const resultsCount = qs('#resultsCount');
-  
+  const grid = qs("[data-catalog]");
+  const resultsCount = qs("#resultsCount");
+
   // Show loading state
   if (page === 1) {
-    grid.innerHTML = '';
+    grid.innerHTML = "";
     for (let i = 0; i < 20; i++) {
       grid.append(skeletonCard());
     }
-    resultsCount.textContent = 'Chargement...';
+    resultsCount.textContent = "Chargement...";
   }
-  
+
   try {
     let data;
-    
+
     if (currentQuery.trim()) {
       // Search mode
       data = await searchMovies(currentQuery.trim(), page);
@@ -127,67 +146,70 @@ async function fetchMovies(page = 1) {
         sort_by: currentSort,
         ...(currentGenre && { with_genres: currentGenre }),
         ...(currentYear && { primary_release_year: currentYear }),
-        'vote_count.gte': 50 // Only movies with some votes
+        "vote_count.gte": 50, // Only movies with some votes
       };
       data = await discoverMovies(page, filters);
     }
-    
+
     const movies = data.results || [];
     totalPages = Math.min(data.total_pages || 1, 500); // TMDB limit
-    
+
     if (page === 1) {
-      grid.innerHTML = '';
+      grid.innerHTML = "";
     }
-    
+
     if (movies.length === 0) {
       if (page === 1) {
-        grid.innerHTML = '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
+        grid.innerHTML =
+          '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
       }
-      resultsCount.textContent = 'Aucun résultat';
+      resultsCount.textContent = "Aucun résultat";
     } else {
       movies.forEach((movie, i) => {
         const card = cardFromMovie(movie);
         card.style.animationDelay = `${Math.min(i * 30, 300)}ms`;
         grid.append(card);
       });
-      
+
       const totalResults = Math.min(data.total_results || 0, 10000);
-      resultsCount.textContent = `${totalResults.toLocaleString()} film${totalResults > 1 ? 's' : ''}`;
+      resultsCount.textContent = `${totalResults.toLocaleString()} film${
+        totalResults > 1 ? "s" : ""
+      }`;
     }
-    
+
     updatePagination();
-    
   } catch (error) {
-    console.error('[Browse] Erreur chargement films:', error);
+    console.error("[Browse] Erreur chargement films:", error);
     if (page === 1) {
-      grid.innerHTML = '<div class="error-state"><p>Erreur lors du chargement des films.</p></div>';
-      resultsCount.textContent = 'Erreur';
+      grid.innerHTML =
+        '<div class="error-state"><p>Erreur lors du chargement des films.</p></div>';
+      resultsCount.textContent = "Erreur";
     }
   }
 }
 
 function updatePagination() {
-  const prevBtn = qs('#prevPage');
-  const nextBtn = qs('#nextPage');
-  const pageInfo = qs('#pageInfo');
-  
+  const prevBtn = qs("#prevPage");
+  const nextBtn = qs("#nextPage");
+  const pageInfo = qs("#pageInfo");
+
   prevBtn.disabled = currentPage <= 1;
   nextBtn.disabled = currentPage >= totalPages;
   pageInfo.textContent = `Page ${currentPage} sur ${totalPages}`;
 }
 
 function setupEventListeners() {
-  const searchInput = qs('#catalogSearch');
-  const genreSelect = qs('#genreFilter');
-  const sortSelect = qs('#sortBy');
-  const yearSelect = qs('#yearFilter');
-  const prevBtn = qs('#prevPage');
-  const nextBtn = qs('#nextPage');
-  
+  const searchInput = qs("#catalogSearch");
+  const genreSelect = qs("#genreFilter");
+  const sortSelect = qs("#sortBy");
+  const yearSelect = qs("#yearFilter");
+  const prevBtn = qs("#prevPage");
+  const nextBtn = qs("#nextPage");
+
   let searchTimeout;
-  
+
   // Search input with debounce
-  searchInput.addEventListener('input', (e) => {
+  searchInput.addEventListener("input", (e) => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       currentQuery = e.target.value;
@@ -195,40 +217,40 @@ function setupEventListeners() {
       fetchMovies(1);
     }, 500);
   });
-  
+
   // Filter controls
-  genreSelect.addEventListener('change', (e) => {
+  genreSelect.addEventListener("change", (e) => {
     currentGenre = e.target.value;
     currentPage = 1;
     fetchMovies(1);
   });
-  
-  sortSelect.addEventListener('change', (e) => {
+
+  sortSelect.addEventListener("change", (e) => {
     currentSort = e.target.value;
     currentPage = 1;
     fetchMovies(1);
   });
-  
-  yearSelect.addEventListener('change', (e) => {
+
+  yearSelect.addEventListener("change", (e) => {
     currentYear = e.target.value;
     currentPage = 1;
     fetchMovies(1);
   });
-  
+
   // Pagination
-  prevBtn.addEventListener('click', () => {
+  prevBtn.addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
       fetchMovies(currentPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
-  
-  nextBtn.addEventListener('click', () => {
+
+  nextBtn.addEventListener("click", () => {
     if (currentPage < totalPages) {
       currentPage++;
       fetchMovies(currentPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
 }

@@ -288,7 +288,8 @@
   color: var(--text);
 }
 
-.empty-state, .error-state {
+.empty-state,
+.error-state {
   text-align: center;
   padding: var(--space-6);
   color: var(--muted);
@@ -491,31 +492,31 @@
   .catalog-toolbar {
     padding: var(--space-2);
   }
-  
+
   .filters-section {
     flex-direction: column;
   }
-  
+
   .search-input {
     min-width: auto;
   }
-  
+
   .results-info {
     flex-direction: column;
     gap: var(--space-2);
     text-align: center;
   }
-  
+
   .overview-stats {
     flex-direction: column;
     gap: var(--space-2);
   }
-  
+
   .cast-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: var(--space-2);
   }
-  
+
   .videos-grid {
     grid-template-columns: 1fr;
   }
@@ -525,7 +526,7 @@
   .cast-grid {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
-  
+
   .cast-photo {
     width: 60px;
     height: 60px;

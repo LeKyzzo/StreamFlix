@@ -70,7 +70,9 @@ export const tmdbApi = {
     return fetchJson(url);
   },
   getMovieDetails(id) {
-    const url = buildUrl(`/movie/${id}`, { append_to_response: "credits,videos,images,similar" });
+    const url = buildUrl(`/movie/${id}`, {
+      append_to_response: "credits,videos,images,similar",
+    });
     return fetchJson(url);
   },
   getMovieCredits(id) {
