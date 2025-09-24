@@ -1,167 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr" data-theme="dark">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>StreamFlix — Accueil</title>
-  <meta name="description" content="StreamFlix — Accueil. UI streaming moderne, HTML/CSS only, prête pour API." />
-
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Unbounded:wght@700&display=swap" rel="stylesheet">
-
-  <!-- CSS séparés -->
-  <link rel="stylesheet" href="./style/global.css" />
-  <link rel="stylesheet" href="./style/index.css" />
-</head>
-<body class="page page--home">
-  <!-- Header -->
-  <header class="site-header" role="banner">
-    <div class="container header__inner">
-      <a class="brand" href="./index.html" aria-label="Accueil StreamFlix">
-        <span class="brand__mark">●</span>
-        <span class="brand__name">StreamFlix</span>
-      </a>
-
-      <nav class="nav" role="navigation" aria-label="Navigation principale">
-        <a class="nav__link is-active" href="#">Accueil</a>
-        <a class="nav__link" href="#">Séries</a>
-        <a class="nav__link" href="#">Films</a>
-        <a class="nav__link" href="#">Nouveautés</a>
-        <a class="nav__link" href="#">Ma liste</a>
-      </nav>
-
-      <div class="header-actions">
-        <form class="search" role="search" aria-label="Rechercher" action="#" method="get">
-          <input class="search__input" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher un titre" />
-          <button class="btn btn--icon" type="submit" aria-label="Rechercher"><span class="icon">🔍</span></button>
-        </form>
-
-        <!-- Toggle thème 100% HTML/CSS (remplace juste l’ancien bouton) -->
-        <input id="theme-switch" class="visually-hidden" type="checkbox" />
-        <label for="theme-switch"
-               class="btn btn--icon only-desktop theme-toggle"
-               aria-label="Basculer le thème"
-               title="Basculer le thème">
-          <span class="icon" aria-hidden="true"></span>
-        </label>
-
-        <button class="avatar" aria-haspopup="menu" aria-label="Profil">
-          <img src="https://picsum.photos/seed/user/80/80" alt="" />
-        </button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>StreamFlix — Accueil</title>
+    <meta name="description" content="Plateforme de streaming — design type Netflix, responsive." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E">
+    <script>
+      // Early theme apply (works even if modules don't load)
+      (function(){
+        try{ var t = localStorage.getItem('sf_theme'); if(t) document.documentElement.setAttribute('data-theme', t); }catch(e){}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+  </head>
+  <body>
+    <header class="site-header" data-sticky>
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="StreamFlix accueil">
+          <span class="brand-logo" aria-hidden="true">S</span>
+          <span class="brand-text">StreamFlix</span>
+        </a>
+        <nav class="main-nav" aria-label="Principale">
+          <a href="#tendances" class="nav-link">Tendances</a>
+          <a href="#populaire" class="nav-link">Populaire</a>
+          <a href="#recent" class="nav-link">Récemment ajoutés</a>
+          <a href="#top10" class="nav-link">Top 10</a>
+          <span class="nav-sep" aria-hidden="true"></span>
+          <a href="browse.html" class="nav-link">Voir tous les films</a>
+        </nav>
+        <div class="header-actions">
+          <button id="theme-toggle" class="btn ghost" aria-label="Changer le thème" title="Thème"><span class="icon">🌓</span></button>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Mise en avant">
-    <div class="hero__media" style="--hero-img:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=2000&auto=format&fit=crop');"></div>
-    <div class="container hero__content">
-      <h1 class="hero__title"><span class="badge">Top 10</span>The Night Wanderer</h1>
-      <p class="hero__meta">2024 • 16+ • 1 saison • Thriller</p>
-      <p class="hero__desc">Un détective insomniaque traque un justicier nocturne dans une ville où chaque ombre cache un secret.</p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="./html/movie.html?id=tnw" data-movie-id="tnw">▶️ Lecture</a>
-        <a class="btn btn--ghost" href="./html/movie.html?id=tnw" data-movie-id="tnw">ℹ️ Plus d’infos</a>
-      </div>
-    </div>
-  </section>
-
-  <main class="page__content" id="main" role="main">
-    <!-- Trending Now (16:9) -->
-    <section class="row" aria-label="Tendance maintenant">
-      <div class="container row__head">
-        <h2 class="row__title">Tendance maintenant</h2>
-        <a class="row__cta" href="#">Tout voir</a>
-      </div>
-
-      <div class="container row__grid" data-row="trending">
-        <!-- CARD = image directe + overlay hover (pas de fond gris) -->
-        <a class="card" href="./html/movie.html?id=irishman" data-movie-id="irishman">
-          <figure class="card__media">
-            <img src="https://picsum.photos/seed/irishman/800/450" alt="The Irishman" loading="lazy" />
-          </figure>
-          <div class="card__overlay">
-            <div class="card__actions">
-              <span class="chip">HD</span>
-              <button class="round" aria-label="Lecture">▶</button>
-              <button class="round" aria-label="Ajouter à ma liste">＋</button>
-              <button class="round" aria-label="J’aime">❤</button>
+    <main id="main">
+      <section class="hero" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="kicker">Original</p>
+            <h1 class="hero-title">Aube Rouge</h1>
+            <p class="hero-subtitle">Quand le monde s'effondre, une héroïne se lève. Un thriller futuriste haletant.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="movie.html?id=1">Lecture</a>
+              <a class="btn ghost" href="#tendances">Bande-annonce</a>
             </div>
           </div>
-        </a>
+          <div class="hero-media parallax-tilt" aria-hidden="true">
+            <div class="poster-layer layer-back"></div>
+            <div class="poster-layer layer-mid"></div>
+            <div class="poster-layer layer-front"></div>
+          </div>
+        </div>
+      </section>
 
-        <a class="card" href="./html/movie.html?id=crown" data-movie-id="crown">
-          <figure class="card__media"><img src="https://picsum.photos/seed/crown/800/450" alt="The Crown" loading="lazy" /></figure>
-          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
-        </a>
+      <section id="tendances" class="section">
+        <div class="container section-header"><h2 class="section-title">Tendances</h2></div>
+  <div class="container"><div class="grid movies" data-collection="trending" data-skeleton="10" data-skeleton-only="true">
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+        </div></div>
+      </section>
 
-        <a class="card" href="./html/movie.html?id=cobra" data-movie-id="cobra">
-          <figure class="card__media"><img src="https://picsum.photos/seed/cobra/800/450" alt="Cobra Kai" loading="lazy" /></figure>
-          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
-        </a>
+      <section id="populaire" class="section">
+        <div class="container section-header"><h2 class="section-title">Populaire</h2></div>
+  <div class="container"><div class="grid movies" data-collection="popular" data-skeleton="10" data-skeleton-only="true">
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+        </div></div>
+      </section>
 
-        <a class="card" href="./html/movie.html?id=shameless" data-movie-id="shameless">
-          <figure class="card__media"><img src="https://picsum.photos/seed/shameless/800/450" alt="Shameless" loading="lazy" /></figure>
-          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
-        </a>
+      <section id="recent" class="section">
+        <div class="container section-header"><h2 class="section-title">Récemment ajoutés</h2></div>
+  <div class="container"><div class="grid movies" data-collection="recent" data-skeleton="10" data-skeleton-only="true">
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+          <article class="movie-card">
+            <a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a>
+            <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+          </article>
+        </div></div>
+      </section>
 
-        <a class="card" href="./html/movie.html?id=lastdance" data-movie-id="lastdance">
-          <figure class="card__media"><img src="https://picsum.photos/seed/lastdance/800/450" alt="The Last Dance" loading="lazy" /></figure>
-          <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
-        </a>
+      <section id="top10" class="section">
+        <div class="container section-header"><h2 class="section-title">Top 10</h2></div>
+        <div class="container">
+          <div class="grid movies top10" data-collection="top10" data-skeleton="10" data-skeleton-only="true">
+            
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+            <article class="movie-card"><a class="card-media-wrap" href="movie.html"><div class="card-media skeleton"></div><div class="card-meta"><h3 class="card-title">&nbsp;</h3><p class="card-subtitle">&nbsp;</p></div></a><button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <nav class="footer-nav" aria-label="Secondaire">
+          <a href="#">À propos</a>
+          <a href="#">Emplois</a>
+          <a href="#">Confidentialité</a>
+          <a href="#">Cookies</a>
+        </nav>
+        <p class="copyright">© 2025 StreamFlix</p>
       </div>
-    </section>
+    </footer>
 
-    <!-- Top 10 Today (jaquettes 2:3 + gros numéros outline) -->
-    <section class="row" aria-label="Top 10 aujourd’hui">
-      <div class="container row__head">
-        <h2 class="row__title">Top 10 aujourd’hui</h2>
-        <a class="row__cta" href="#">Tout voir</a>
-      </div>
-
-      <div class="container row__grid" data-row="top10">
-        <a class="card card--ranked" href="./html/movie.html?id=qg" data-movie-id="qg">
-            <span class="card__rank">1</span>
-            <figure class="card__media"><img src="https://picsum.photos/seed/qg/400/600" alt="The Queen's Gambit" loading="lazy" /></figure>
-            <div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div>
+    <template id="movie-card-template">
+      <article class="movie-card appear" data-id="">
+        <a class="card-media-wrap" href="movie.html">
+          <div class="card-media">
+            <picture>
+              <source type="image/avif" srcset="" />
+              <source type="image/webp" srcset="" />
+              <img class="card-img skeleton" alt="" loading="lazy" width="300" height="450" sizes="(min-width:1440px) 280px, (min-width:960px) 220px, (min-width:720px) 200px, 46vw" />
+            </picture>
+            <div class="card-overlay">
+              <button class="btn circle play" aria-label="Lecture">▶</button>
+              <button class="btn circle like" aria-label="Like">❤</button>
+            </div>
+          </div>
+          <div class="card-meta">
+            <h3 class="card-title"></h3>
+            <p class="card-subtitle"></p>
+          </div>
         </a>
+        <button class="card-action btn icon-only" aria-label="Ajouter à la liste">＋</button>
+      </article>
+    </template>
 
-        <a class="card card--ranked" href="./html/movie.html?id=impossible"><span class="card__rank">2</span><figure class="card__media"><img src="https://picsum.photos/seed/impossible/400/600" alt="The Impossible" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-
-        <a class="card card--ranked" href="./html/movie.html?id=chappelle"><span class="card__rank">3</span><figure class="card__media"><img src="https://picsum.photos/seed/chappelle/400/600" alt="Chappelle's Show" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-
-        <a class="card card--ranked" href="./html/movie.html?id=opxmas"><span class="card__rank">4</span><figure class="card__media"><img src="https://picsum.photos/seed/opxmas/400/600" alt="Operation Christmas Drop" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-
-        <a class="card card--ranked" href="./html/movie.html?id=mile22"><span class="card__rank">5</span><figure class="card__media"><img src="https://picsum.photos/seed/mile22/400/600" alt="Mile 22" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-      </div>
-    </section>
-
-    <!-- Ma liste -->
-    <section class="row" aria-label="Ma liste">
-      <div class="container row__head">
-        <h2 class="row__title">Ma liste</h2>
-        <a class="row__cta" href="#">Gérer</a>
-      </div>
-      <div class="container row__grid" data-row="mylist">
-        <a class="card" href="./html/movie.html?id=loom"><figure class="card__media"><img src="https://picsum.photos/seed/loom/800/450" alt="Loom" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-        <a class="card" href="./html/movie.html?id=maze"><figure class="card__media"><img src="https://picsum.photos/seed/maze/800/450" alt="Maze" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-        <a class="card" href="./html/movie.html?id=nova"><figure class="card__media"><img src="https://picsum.photos/seed/nova/800/450" alt="Nova" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">4K</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-        <a class="card" href="./html/movie.html?id=onyx"><figure class="card__media"><img src="https://picsum.photos/seed/onyx/800/450" alt="Onyx" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-        <a class="card" href="./html/movie.html?id=pulse"><figure class="card__media"><img src="https://picsum.photos/seed/pulse/800/450" alt="Pulse" loading="lazy" /></figure><div class="card__overlay"><div class="card__actions"><span class="chip">HD</span><button class="round">▶</button><button class="round">＋</button><button class="round">❤</button></div></div></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer__inner">
-      <nav class="footer__nav" aria-label="Pied de page">
-        <a href="#">Audio et sous-titres</a>
-        <a href="#">Presse</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Nous contacter</a>
-      </nav>
-      <p class="footer__copy">© 2025 StreamFlix — UI d’étude inspirée des plateformes de streaming.</p>
-    </div>
-  </footer>
-</body>
+    <script>
+      // Fallback theme toggle (if modules fail)
+      (function(){
+        if(window.__sfThemeBound) return;
+        var THEMES=['dark','light','cinema'];
+        function applyTheme(name){
+          if(THEMES.indexOf(name)<0) name='dark';
+          document.documentElement.setAttribute('data-theme', name);
+          try{localStorage.setItem('sf_theme', name);}catch(e){}
+        }
+        var btn=document.getElementById('theme-toggle');
+        if(btn){
+          btn.addEventListener('click', function(){
+            var cur=document.documentElement.getAttribute('data-theme')||'dark';
+            var next=THEMES[(THEMES.indexOf(cur)+1)%THEMES.length];
+            applyTheme(next);
+          });
+        }
+        window.__sfThemeBound=true;
+      })();
+  </script>
+  <script src="assets/js/config.js"></script>
+  <script type="module" src="assets/js/theme-toggle.js"></script>
+  <script src="assets/js/nav.js"></script>
+    <script type="module" src="assets/js/pages/home.js"></script>
+    <script src="assets/js/hero.js"></script>
+  </body>
 </html>
