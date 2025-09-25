@@ -1,8 +1,8 @@
-/* StreamFlix - Global CSS */
+/* Feuille globale StreamFlix */
 
 /* ============================================================================
-   VARIABLES & DESIGN TOKENS
-   ========================================================================== */
+  VARIABLES / TOKENS
+  ========================================================================== */
 
 :root {
   /* Spacing scale */
@@ -113,8 +113,8 @@ html[data-theme="cinema"] {
 }
 
 /* ============================================================================
-   BASE STYLES
-   ========================================================================== */
+  BASE
+  ========================================================================== */
 
 *,
 *::before,
@@ -202,8 +202,8 @@ a:hover {
 }
 
 /* ============================================================================
-   LAYOUT - HEADER, HERO, GRIDS, FOOTER
-   ========================================================================== */
+  LAYOUT (header / hero / grids)
+  ========================================================================== */
 
 .site-header {
   position: fixed;
@@ -370,20 +370,20 @@ a:hover {
   gap: var(--space-3);
 }
 
-/* Anchor offset for fixed header */
+/* Décalage ancre (header fixe) */
 section[id] {
   scroll-margin-top: calc(var(--header-offset, 64px) + 12px);
 }
 
-/* Page offset helper for pages without hero behind header */
+/* Décalage pages sans hero derrière header */
 .page-offset {
   /* Use dynamic header height + some breathing space */
   padding-top: calc(var(--header-offset, 64px) + var(--space-5));
 }
 
 /* ============================================================================
-   COMPONENTS - BUTTONS, CARDS, TABS, etc.
-   ========================================================================== */
+  COMPOSANTS (boutons / cartes / tabs)
+  ========================================================================== */
 
 /* Buttons */
 .btn {

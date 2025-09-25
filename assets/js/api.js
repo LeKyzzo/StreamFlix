@@ -1,6 +1,6 @@
-/* StreamFlix - API Services Module */
+/* Services API TMDB + fallback mock */
 
-// TMDB API Service
+// Appels TMDB
 export const tmdbApi = {
   getTrendingMovies(timeWindow = "week", page = 1) {
     return window.StreamFlix.API.fetchTmdb(`/trending/movie/${timeWindow}`, {
@@ -42,15 +42,15 @@ export const tmdbApi = {
   },
 };
 
-// Image URL builder
+// URL image
 export const buildImageUrl = (path, size = "w342") => {
   return window.StreamFlix.API.buildImageUrl(path, size);
 };
 
-// Configuration constants
+// Constantes config
 export const TMDB_CONFIG = window.STREAMFLIX_CONFIG;
 
-// Legacy mock API (fallback for development)
+// Mock legacy si pas d'API propre
 export async function fetchCollection(kind) {
   await new Promise((r) => setTimeout(r, 250));
 
@@ -72,7 +72,7 @@ export async function fetchCollection(kind) {
     }
   }
 
-  // Mock data fallback
+  // Données fictives
   const base = [
     {
       id: 1,
@@ -158,7 +158,7 @@ export async function fetchMovie(id) {
     }
   }
 
-  // Mock data fallback
+  // Film fictif
   const n = Number(id) || 1;
   return {
     id: n,

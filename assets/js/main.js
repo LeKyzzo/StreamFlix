@@ -1,12 +1,12 @@
-/* StreamFlix - Main JavaScript Bundle */
+/* Bundle principal StreamFlix */
 
 // ============================================================================
-// CONFIGURATION & GLOBALS
+// CONFIG & GLOBALES
 // ============================================================================
 
 window.STREAMFLIX_CONFIG = {
-  USE_API: true, // enabled to fetch real TMDB trending
-  API_BASE: "", // e.g., 'https://api.example.com'
+  USE_API: true, // vrai = utiliser TMDB réel
+  API_BASE: "", // backend optionnel (non utilisé ici)
   TMDB_API_KEY: "e4b90327227c88daac14c0bd0c1f93cd",
   TMDB_BASE_URL: "https://api.themoviedb.org/3",
   TMDB_IMAGE_BASE_URL: "https://image.tmdb.org/t/p",
@@ -19,15 +19,15 @@ window.STREAMFLIX_CONFIG = {
   },
 };
 
-// Legacy support
+// Compat rétro
 window.STREAMFLIX_USE_API = window.STREAMFLIX_CONFIG.USE_API;
 window.STREAMFLIX_API_BASE = window.STREAMFLIX_CONFIG.API_BASE;
 
 // ============================================================================
-// UTILITIES
+// OUTILS DOM / FORMATAGE
 // ============================================================================
 
-// DOM helpers
+// Helpers DOM simples
 const $ = {
   qs: (sel, root = document) => root.querySelector(sel),
   qsa: (sel, root = document) => [...root.querySelectorAll(sel)],
@@ -42,7 +42,7 @@ const $ = {
   },
 };
 
-// Formatting utilities
+// Formatage textes / nombres / dates
 const format = {
   runtime: (minutes) => {
     if (!minutes) return "";
@@ -73,7 +73,7 @@ const format = {
 };
 
 // ============================================================================
-// THEME SYSTEM
+// THEMES (cycle dark → light → cinema)
 // ============================================================================
 
 const Theme = {
@@ -113,7 +113,7 @@ const Theme = {
 };
 
 // ============================================================================
-// NAVIGATION & HEADER
+// NAVIGATION + ENTÊTE (soulignement dynamique / mobile)
 // ============================================================================
 
 const Navigation = {
@@ -243,7 +243,7 @@ const Navigation = {
 
     toggle.addEventListener("click", toggleNav);
 
-    // Close when clicking a nav link (for anchor navigation) on mobile
+  // Ferme après clic sur un lien (mobile)
     nav.addEventListener("click", (e) => {
       const a = e.target.closest("a.nav-link");
       if (a && window.innerWidth < 720) {
@@ -252,19 +252,19 @@ const Navigation = {
       }
     });
 
-    // Close on Escape
+  // Échap => fermer
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeNav();
     });
 
-    // Click outside to close
+  // Clic extérieur => fermer
     document.addEventListener("click", (e) => {
       if (!root.classList.contains("nav-open")) return;
       const within = e.target.closest("#primary-navigation, #nav-toggle");
       if (!within) closeNav();
     });
 
-    // Resize / orientation change
+  // Resize => reset état
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 720) {
         closeNav();
@@ -274,7 +274,7 @@ const Navigation = {
 };
 
 // ============================================================================
-// HERO PARALLAX EFFECTS
+// HERO PARALLAX (incline via souris, pas de scroll vertical)
 // ============================================================================
 
 const HeroEffects = {
@@ -292,7 +292,7 @@ const HeroEffects = {
     let raf = 0;
     let px = 0,
       py = 0;
-    let sy = 0; // vertical scroll offset (will be neutralized to prevent jump)
+  let sy = 0; // vertical désactivé (évite le saut)
     let inView = true;
 
     const apply = () => {
@@ -307,8 +307,7 @@ const HeroEffects = {
         layers.forEach((el, i) => {
           const depth = (i + 1) * 8;
           const tx = inView ? px * depth : 0;
-          // Removed scroll-based vertical shift to avoid 'mounting' jump
-          const ty = inView ? py * depth : 0;
+          const ty = inView ? py * depth : 0; // plus de décalage scroll
           el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(
             1
           )}px)`;
@@ -350,17 +349,16 @@ const HeroEffects = {
       io.observe(media);
     }
 
-    // Scroll effect disabled (was causing vertical jump). If needed later,
-    // re-enable with a softer factor & clamped only when user not near top.
+    // Effet scroll retiré (saccades). Réactiver plus tard si nécessaire.
   },
 };
 
 // ============================================================================
-// API SERVICE
+// SERVICE API (TMDB)
 // ============================================================================
 
 const API = {
-  // TMDB helper
+  // Construit URL TMDB
   buildTmdbUrl(endpoint, params = {}) {
     const config = window.STREAMFLIX_CONFIG;
     const u = new URL(config.TMDB_BASE_URL.replace(/\/$/, "") + endpoint);
@@ -413,13 +411,13 @@ const API = {
 };
 
 // ============================================================================
-// INITIALIZATION
+// INITIALISATION
 // ============================================================================
 
-// Early theme initialization
+// Thème tôt (évite flash)
 Theme.init();
 
-// DOM ready initialization
+// Quand DOM prêt
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     Navigation.init();

@@ -1,6 +1,6 @@
-/* StreamFlix - Index Page Styles */
+/* Styles page d'accueil */
 
-/* Hero */
+/* HERO */
 .hero {
   padding-block: calc(var(--space-6) + var(--header-offset, 64px))
     var(--space-6);
@@ -60,7 +60,7 @@
   pointer-events: none;
 }
 
-/* Variante claire : dégradés vers le blanc (pour data-theme="light") */
+/* Variante claire (dégradés blancs) */
 html[data-theme="light"] .hero-content {
   background: linear-gradient(
     135deg,
@@ -88,7 +88,7 @@ html[data-theme="light"] .hero::after {
   );
 }
 
-/* Overlap tendances (modifiable) */
+/* Overlap section tendances */
 section#tendances {
   margin-top: -15vh;
   position: relative;
@@ -137,7 +137,7 @@ section#tendances {
   background: linear-gradient(135deg, #fff2, transparent);
 }
 
-/* Hero rotation fade */
+/* Fade rotation hero */
 .hero-fade-enter,
 .hero-fade-leave {
   transition: opacity 600ms var(--ease-std);
@@ -155,7 +155,7 @@ section#tendances {
   opacity: 0;
 }
 
-/* Hero */
+/* Cartes (effets) */
 @media (hover: hover) {
   .grid.movies > .movie-card {
     transition: transform var(--dur-2) var(--ease-std);
@@ -185,7 +185,7 @@ section#tendances {
   }
 }
 
-/* Top 10 ranking */
+/* Top 10 */
 .grid.top10 {
   counter-reset: rank;
 }
@@ -194,7 +194,7 @@ section#tendances {
   position: relative;
 }
 
-/* Pastilles de classement */
+/* Pastilles classement */
 .grid.top10 .movie-card::before {
   content: counter(rank);
   position: absolute;
@@ -217,7 +217,7 @@ section#tendances {
   opacity: 0;
 }
 
-/* Pastilles toujours visibles pour le podium (1,2,3) */
+/* Podium toujours visible */
 .grid.top10 .movie-card:nth-child(1)::before {
   opacity: 1;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
@@ -242,7 +242,7 @@ section#tendances {
   box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
 }
 
-/* Pastilles visibles au hover pour les autres positions (4-10) */
+/* Positions 4-10 : visible au hover */
 .grid.top10 .movie-card:nth-child(n + 4):hover::before,
 .grid.top10 .movie-card:nth-child(n + 4):focus-within::before {
   opacity: 1;
@@ -251,7 +251,7 @@ section#tendances {
   box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
 }
 
-/* Animation au hover pour toutes les pastilles */
+/* Anim pastilles hover */
 .grid.top10 .movie-card:hover::before,
 .grid.top10 .movie-card:focus-within::before {
   transform: scale(1.1);

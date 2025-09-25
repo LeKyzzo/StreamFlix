@@ -1,4 +1,4 @@
-// home.js - Page d'accueil avec collections TMDB
+// Accueil : listes + hero dynamique
 import { tmdbApi, buildImageUrl, TMDB_CONFIG } from "../api.js";
 
 const { $, format } = window.StreamFlix;
@@ -99,10 +99,10 @@ function loaderForCollection(name) {
   }
 }
 
-// --- Hero rotating trending movies ---
-const HERO_ROTATION_ENABLED = true; // activation rotation
+// Rotation hero (tendances)
+const HERO_ROTATION_ENABLED = true; // on/off
 const HERO_ROTATION_INTERVAL = 15000; // 15s
-const HERO_FADE_DURATION = 600; // ms
+const HERO_FADE_DURATION = 600; // ms transition
 let heroRotationTimer = null;
 let heroList = [];
 let heroPos = 0;
@@ -140,7 +140,7 @@ function setHeroContent(movie) {
     posterLayer.style.backgroundSize = "cover";
     posterLayer.style.backgroundPosition = "center";
   }
-  // Pré-charger les 3 suivants sur les autres couches (2,3,4)
+  // Pré-charger 3 suivants (fluidité)
   if (heroList.length > 1) {
     const next1 = heroList[(heroPos + 1) % heroList.length];
     if (layerMid && next1?.poster_path) {
@@ -177,7 +177,7 @@ function setHeroContent(movie) {
       layerExtra.style.backgroundPosition = "center";
     }
   }
-  // Utiliser l'affiche en plein fond (pas de duplication avec layer-front) => on peut flouter l'arrière plan si besoin
+  // Fond global (gradient + poster)
   if (heroSection && movie.poster_path) {
     const bgPoster = buildImageUrl(
       movie.poster_path,
@@ -211,7 +211,7 @@ async function loadHeroRotation() {
         setHeroContent(heroList[heroPos]);
       }, HERO_ROTATION_INTERVAL);
 
-      // Pause quand l'onglet est masqué
+  // Pause quand onglet caché
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           if (heroRotationTimer) {
@@ -235,11 +235,11 @@ async function renderCollection(grid) {
   const defaultCount = grid.classList.contains("top10") ? 10 : 6;
   const count = Math.max(Number(grid.dataset.skeleton) || defaultCount, 3);
 
-  // Affiche des skeletons
+  // Skeletons init
   grid.innerHTML = "";
   for (let i = 0; i < count; i++) grid.append(skeletonCard());
 
-  // Mode "skeleton only"
+  // Mode skeleton permanent
   if (grid.dataset.skeletonOnly === "true") {
     return;
   }

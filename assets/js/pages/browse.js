@@ -1,4 +1,4 @@
-// browse.js - Page de navigation avec recherche et filtres
+// Parcourir : recherche + filtres + pagination
 import { tmdbApi, buildImageUrl, TMDB_CONFIG } from "../api.js";
 
 const { $, format } = window.StreamFlix;
@@ -73,7 +73,7 @@ function cardFromMovie(m) {
     .filter(Boolean)
     .join(" • ");
 
-  // Hover overlay content
+  // Overlay hover
   const oTitle = node.querySelector(".overlay-title");
   const oDesc = node.querySelector(".overlay-desc");
   if (oTitle) oTitle.textContent = m.title || m.name || "";
@@ -117,7 +117,7 @@ async function fetchMovies(page = 1) {
   const grid = $.qs("[data-catalog]");
   const resultsCount = $.qs("#resultsCount");
 
-  // Show loading state
+  // État chargement (page 1)
   if (page === 1) {
     grid.innerHTML = "";
     for (let i = 0; i < 20; i++) {
@@ -144,11 +144,11 @@ async function fetchMovies(page = 1) {
     const movies = data.results || [];
     totalPages = Math.min(data.total_pages || 1, 500);
 
-    if (page === 1) {
+  if (page === 1) {
       grid.innerHTML = "";
     }
 
-    if (movies.length === 0) {
+  if (movies.length === 0) {
       if (page === 1) {
         grid.innerHTML =
           '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
@@ -161,7 +161,7 @@ async function fetchMovies(page = 1) {
         grid.append(card);
       });
 
-      const totalResults = Math.min(data.total_results || 0, 10000);
+  const totalResults = Math.min(data.total_results || 0, 10000); // limite API TMDB
       resultsCount.textContent = `${totalResults.toLocaleString()} film${
         totalResults > 1 ? "s" : ""
       }`;

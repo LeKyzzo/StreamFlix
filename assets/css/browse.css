@@ -1,6 +1,6 @@
-/* StreamFlix - Browse Page Styles */
+/* Styles page catalogue */
 
-/* Catalog page */
+/* Bloc toolbar */
 .catalog-toolbar {
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Search and filters */
+/* Recherche + filtres */
 .search-section {
   display: flex;
   gap: var(--space-3);
@@ -54,7 +54,7 @@
   color: var(--text);
 }
 
-/* In catalog grid, keep width stable on hover */
+/* Grille : largeur stable */
 .catalog-grid .movie-card {
   transition: transform var(--dur-2) var(--ease-std);
 }
@@ -65,7 +65,7 @@
   transform: scale(1.05);
 }
 
-/* Other components */
+/* Divers */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -81,7 +81,7 @@
   font-size: var(--fs-200);
 }
 
-/* States */
+/* États */
 .empty-state,
 .error-state,
 .loading,

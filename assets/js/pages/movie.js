@@ -1,4 +1,4 @@
-// movie.js - Page de détail du film
+// Page détail film
 import { tmdbApi, buildImageUrl, TMDB_CONFIG } from "../api.js";
 
 const { $, format } = window.StreamFlix;
@@ -36,11 +36,11 @@ function getStatusText(status) {
 function setMovieDetails(movie) {
   currentMovie = movie;
 
-  // Basic info
+  // Infos principales
   $.qs("#movieTitle").textContent = movie.title || "Film sans titre";
   $.qs("#crumbTitle").textContent = movie.title || "Film";
 
-  // Meta line
+  // Ligne méta
   const year = movie.release_date
     ? new Date(movie.release_date).getFullYear()
     : "";
@@ -51,11 +51,11 @@ function setMovieDetails(movie) {
   const metaParts = [year, runtime, rating].filter(Boolean);
   $.qs("#movieMeta").textContent = metaParts.join(" • ");
 
-  // Overview
+  // Synopsis
   $.qs("#movieOverview").textContent =
     movie.overview || "Aucune description disponible.";
 
-  // Movie info grid (new fields)
+  // Grille infos
   $.qs("#movieDirector").textContent = "—"; // Will be set from credits
   $.qs("#movieBudget").textContent = movie.budget
     ? format.money(movie.budget)
@@ -76,7 +76,7 @@ function setMovieDetails(movie) {
     });
   }
 
-  // Overview stats
+  // Stats overview
   $.qs("#movieRating").textContent = movie.vote_average
     ? `${movie.vote_average.toFixed(1)}/10`
     : "—";
@@ -87,7 +87,7 @@ function setMovieDetails(movie) {
     ? Math.round(movie.popularity)
     : "—";
 
-  // Details metadata
+  // Liste technique
   const details = $.qs("#movieDetails");
   details.innerHTML = "";
 
@@ -116,7 +116,7 @@ function setMovieDetails(movie) {
     }
   });
 
-  // Set poster
+  // Poster
   const posterUrl = movie.poster_path
     ? buildImageUrl(
         movie.poster_path,
@@ -131,7 +131,7 @@ async function loadCast(movieId) {
     const credits = await tmdbApi.getMovieCredits(movieId);
     const castGrid = $.qs("#castGrid");
 
-    // Find director in crew
+  // Réalisateur
     const director = credits.crew?.find((person) => person.job === "Director");
     if (director) {
       $.qs("#movieDirector").textContent = director.name;
@@ -298,7 +298,7 @@ async function renderSimilar(movieId) {
   const grid = $.qs('.grid.movies[data-collection="similar"]');
   if (!grid) return;
 
-  // Show skeletons first
+  // Skeletons
   grid.innerHTML = "";
   for (let i = 0; i < 8; i++) {
     const skeleton = $.el("article", "movie-card");
