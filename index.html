@@ -34,7 +34,7 @@
           <span class="brand-logo" aria-hidden="true">S</span>
           <span class="brand-text">StreamFlix</span>
         </a>
-        <nav class="main-nav" aria-label="Principale">
+  <nav class="main-nav" id="primary-navigation" aria-label="Principale">
           <a href="#tendances" class="nav-link">Tendances</a>
           <a href="#populaire" class="nav-link">Populaire</a>
           <a href="#recent" class="nav-link">Récemment ajoutés</a>
@@ -51,6 +51,16 @@
           >
             <span class="icon">🌓</span>
           </button>
+          <button
+            id="nav-toggle"
+            class="btn ghost mobile-only"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+            title="Menu"
+          >
+            <span class="icon">☰</span>
+          </button>
         </div>
       </div>
     </header>
@@ -59,21 +69,22 @@
       <section class="hero" id="hero">
         <div class="container hero-grid">
           <div class="hero-content">
-            <p class="kicker">Original</p>
-            <h1 class="hero-title">Aube Rouge</h1>
-            <p class="hero-subtitle">
+            <p class="kicker" id="heroKicker">Original</p>
+            <h1 class="hero-title" id="heroTitle">Aube Rouge</h1>
+            <p class="hero-subtitle" id="heroSubtitle">
               Quand le monde s'effondre, une héroïne se lève. Un thriller
               futuriste haletant.
             </p>
             <div class="hero-actions">
-              <a class="btn primary" href="movie.html?id=1">Lecture</a>
+              <a class="btn primary" id="heroPlayBtn" href="movie.html?id=1">Lecture</a>
               <a class="btn ghost" href="#tendances">Bande-annonce</a>
             </div>
           </div>
           <div class="hero-media parallax-tilt" aria-hidden="true">
+            <div class="poster-layer layer-extra"></div>
             <div class="poster-layer layer-back"></div>
             <div class="poster-layer layer-mid"></div>
-            <div class="poster-layer layer-front"></div>
+            <div class="poster-layer layer-front" id="heroPosterlayer"></div>
           </div>
         </div>
       </section>

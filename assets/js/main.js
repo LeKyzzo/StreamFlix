@@ -5,7 +5,7 @@
 // ============================================================================
 
 window.STREAMFLIX_CONFIG = {
-  USE_API: false, // flip to true when API is ready
+  USE_API: true, // enabled to fetch real TMDB trending
   API_BASE: "", // e.g., 'https://api.example.com'
   TMDB_API_KEY: "e4b90327227c88daac14c0bd0c1f93cd",
   TMDB_BASE_URL: "https://api.themoviedb.org/3",
@@ -129,6 +129,7 @@ const Navigation = {
     this.setHeaderOffset(header);
     this.setupScrollEffects(header);
     this.setupSectionHighlighting(links, nav);
+    this.setupMobileToggle(nav);
 
     window.addEventListener("resize", () => this.setHeaderOffset(header));
   },
@@ -217,6 +218,59 @@ const Navigation = {
       this.moveUnderlineTo(current, nav);
     });
   },
+
+  setupMobileToggle(nav) {
+    const toggle = document.getElementById("nav-toggle");
+    if (!toggle || !nav) return;
+
+    const root = document.documentElement; // will hold .nav-open
+    const closeNav = () => {
+      if (!root.classList.contains("nav-open")) return;
+      root.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Ouvrir le menu");
+    };
+    const openNav = () => {
+      if (root.classList.contains("nav-open")) return;
+      root.classList.add("nav-open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Fermer le menu");
+    };
+    const toggleNav = () => {
+      if (root.classList.contains("nav-open")) closeNav();
+      else openNav();
+    };
+
+    toggle.addEventListener("click", toggleNav);
+
+    // Close when clicking a nav link (for anchor navigation) on mobile
+    nav.addEventListener("click", (e) => {
+      const a = e.target.closest("a.nav-link");
+      if (a && window.innerWidth < 720) {
+        // Slight delay so browser can start navigation/scroll
+        setTimeout(closeNav, 120);
+      }
+    });
+
+    // Close on Escape
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNav();
+    });
+
+    // Click outside to close
+    document.addEventListener("click", (e) => {
+      if (!root.classList.contains("nav-open")) return;
+      const within = e.target.closest("#primary-navigation, #nav-toggle");
+      if (!within) closeNav();
+    });
+
+    // Resize / orientation change
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 720) {
+        closeNav();
+      }
+    });
+  },
 };
 
 // ============================================================================
@@ -229,6 +283,7 @@ const HeroEffects = {
     if (!media) return;
 
     const layers = [
+      media.querySelector(".layer-extra"),
       media.querySelector(".layer-back"),
       media.querySelector(".layer-mid"),
       media.querySelector(".layer-front"),
