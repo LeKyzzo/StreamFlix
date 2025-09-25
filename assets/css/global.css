@@ -250,7 +250,7 @@ a:hover {
   display: inline-block;
   width: 1px;
   height: 1.25rem;
-  background-color: color-mix(in srgb, var(--border) 70%, transparent);
+  background-color: color-mix(in srgb, var(--border) 100%, transparent);
   margin-inline: var(--space-3);
 }
 /* sliding underline indicator */
