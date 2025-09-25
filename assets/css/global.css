@@ -673,6 +673,36 @@ section[id] {
   }
 }
 
+/* Désactivation hover cartes sur devices sans hover ou petits écrans */
+@media (hover: none), (max-width: 640px) {
+  .movie-card:hover .card-overlay,
+  .movie-card:focus-within .card-overlay {
+    /* Pas d'apparition overlay sur simple tap */
+    opacity: 0;
+  }
+  .movie-card:hover .card-img,
+  .movie-card:focus-within .card-img {
+    transform: none;
+  }
+  .grid.movies > .movie-card:hover,
+  .grid.movies > .movie-card:focus-within {
+    transform: none;
+    z-index: 1;
+  }
+  .grid.top10 .movie-card:hover::before,
+  .grid.top10 .movie-card:focus-within::before {
+    transform: none;
+  }
+  /* Désactiver perspective inutile */
+  .movie-card {
+    perspective: none;
+  }
+  .movie-card:hover .card-media,
+  .movie-card:focus-within .card-media {
+    transform: none;
+  }
+}
+
 /* Tabs - Composant commun */
 .tabs {
   margin-top: var(--space-5);

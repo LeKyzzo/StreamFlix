@@ -35,10 +35,11 @@
           <span class="brand-text">StreamFlix</span>
         </a>
         <nav class="main-nav" id="primary-navigation" aria-label="Principale">
-          <a href="#tendances" class="nav-link">Tendances</a>
-          <a href="#populaire" class="nav-link">Populaire</a>
-          <a href="#recent" class="nav-link">Récemment ajoutés</a>
           <a href="#top10" class="nav-link">Top 10</a>
+          <a href="#tendances" class="nav-link">Tendances</a>
+            <a href="#populaire" class="nav-link">Populaire</a>
+            <a href="#recent" class="nav-link">Récemment ajoutés</a>
+            <a href="#mieux-notes" class="nav-link">Mieux notés</a>
           <span class="nav-sep" aria-hidden="true"></span>
           <a href="browse.html" class="nav-link">Voir tous les films</a>
         </nav>
@@ -87,6 +88,66 @@
             <div class="poster-layer layer-back"></div>
             <div class="poster-layer layer-mid"></div>
             <div class="poster-layer layer-front" id="heroPosterlayer"></div>
+          </div>
+        </div>
+      </section>
+
+  <section id="top10" class="section">
+        <div class="container section-header">
+          <h2 class="section-title">Top 10</h2>
+        </div>
+        <div class="container">
+          <div
+            class="grid movies top10"
+            data-collection="top10"
+            data-skeleton="10"
+            data-skeleton-only="false"
+          >
+            <article class="movie-card">
+              <a class="card-media-wrap" href="movie.html">
+                <div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div>
+              </a>
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
+            </article>
+            <article class="movie-card">
+              <a class="card-media-wrap" href="movie.html">
+                <div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div>
+              </a>
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
+            </article>
+            <article class="movie-card">
+              <a class="card-media-wrap" href="movie.html">
+                <div class="card-media skeleton"></div>
+                <div class="card-meta">
+                  <h3 class="card-title">&nbsp;</h3>
+                  <p class="card-subtitle">&nbsp;</p>
+                </div>
+              </a>
+              <button
+                class="card-action btn icon-only"
+                aria-label="Ajouter à la liste"
+              >
+                ＋
+              </button>
+            </article>
           </div>
         </div>
       </section>
@@ -272,122 +333,17 @@
         </div>
       </section>
 
-      <section id="top10" class="section">
+      <section id="mieux-notes" class="section">
         <div class="container section-header">
-          <h2 class="section-title">Top 10</h2>
+          <h2 class="section-title">Mieux notés</h2>
         </div>
         <div class="container">
           <div
-            class="grid movies top10"
-            data-collection="top10"
-            data-skeleton="10"
+            class="grid movies"
+            data-collection="mieux-notes"
+            data-skeleton="20"
             data-skeleton-only="false"
           >
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
-            <article class="movie-card">
-              <a class="card-media-wrap" href="movie.html">
-                <div class="card-media skeleton"></div>
-                <div class="card-meta">
-                  <h3 class="card-title">&nbsp;</h3>
-                  <p class="card-subtitle">&nbsp;</p>
-                </div>
-              </a>
-              <button
-                class="card-action btn icon-only"
-                aria-label="Ajouter à la liste"
-              >
-                ＋
-              </button>
-            </article>
             <article class="movie-card">
               <a class="card-media-wrap" href="movie.html">
                 <div class="card-media skeleton"></div>
@@ -436,6 +392,7 @@
           </div>
         </div>
       </section>
+
     </main>
 
     <footer class="site-footer">
