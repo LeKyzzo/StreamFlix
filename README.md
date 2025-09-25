@@ -1,92 +1,82 @@
-# StreamFlix (HTML/CSS/JS only)
+# StreamFlix
 
-A lightweight, Netflix‑style front-end built with semantic HTML, modern CSS, and a touch of vanilla JS. Mobile‑first, responsive, and accessible. No backend required.
+Interface front‑end que j’ai conçue pour reproduire une expérience “type Netflix” uniquement avec HTML, CSS moderne et un peu de JavaScript vanilla. Tout est statique (aucun backend obligatoire) mais j’ai intégré une logique pour brancher facilement une API (TMDB) et faire tourner un hero dynamique avec rotation et parallax.
 
-## Highlights
-- Two pages: Homepage (`index.html`) and Movie details (`movie.html`).
-- Three themes: Dark (default), Light, and Cinema. Theme persists via localStorage.
-- Horizontal “Netflix-style” rows with scroll-snap and smooth wheel/trackpad scroll.
-- Animated skeleton loaders (no-API mode by default).
-- Top 10 ranking row with large stroked numbers behind posters.
-- Minimal JS: sticky/shrinking header, section highlight, tabs indicator, lazy images.
-- Accessibility: keyboard focus parity for hover, prefers-reduced-motion respected.
+## Objectif du projet
 
-## Project structure
+Expérimenter :
+
+- Une architecture simple mais propre (fichiers séparés, utilitaires JS légers)
+- Un hero cinéma plein écran avec couches parallax (tilt + rotation d’affiches tendances)
+- Des rangées horizontales scrollables fluides (scroll-snap) façon plateforme de streaming
+- Une navigation fixe translucide qui devient plus solide au scroll
+- Des thèmes multiples persistants (sombre, clair, “cinéma”) via localStorage
+- Des squelettes animés pour le chargement et une impression de réactivité immédiate
+
+## Fonctionnalités principales
+
+- Hero dynamique (film tendance qui change automatiquement)
+- Effet parallax multi‑couches avec rotation sur mouvement de la souris
+- Bouton de thème cyclique (dark → light → cinema)
+- Navigation sticky + soulignement dynamique de la section
+- Liste “Top 10” avec pastilles rang personnalisées
+- Cartes de films : hover + overlay, squelette avant chargement
+- Version mobile avec menu dépliant accessible (bouton ☰)
+- Détails film enrichis (réalisateur, budget, recettes, statut, genres, cast, vidéos…)
+
+## Structure rapide
+
 ```
-./
-├─ index.html                 # Homepage: hero + horizontal rows
-├─ movie.html                 # Movie details + tabs + similar row
-└─ assets/
-   ├─ css/
-   │  ├─ variables.css        # Design tokens + 3 themes (dark/light/cinema)
-   │  ├─ base.css             # Reset, base typography, scrollbar styles
-   │  ├─ layout.css           # Layout, header, hero, horizontal rows
-   │  ├─ components.css       # Cards, tabs, Top 10, skeletons, buttons
-   │  └─ animations.css       # Micro-interactions & keyframes
-   └─ js/
-      ├─ theme-toggle.js      # Theme cycle + persistence
-      ├─ nav.js               # Sticky header shrink + section highlight
-      ├─ utils/
-      │  └─ dom.js            # Small DOM helpers
-      ├─ services/
-      │  └─ api.js            # Mock data service (optional)
-      └─ pages/
-         ├─ home.js           # Homepage rendering (optional)
-         └─ movie.js          # Movie page rendering (optional)
+index.html        Page d’accueil (hero + sections tendances, populaire, etc.)
+movie.html        Page détail d’un film (hero info + tabs + similaires)
+browse.html       Navigation catalogue avec filtres & pagination
+assets/css        Styles (global + pages + animations)
+assets/js/main.js Initialisation globale (thème, nav, parallax, utilitaires)
+assets/js/pages   Logique spécifique par page (home.js, movie.js, browse.js)
 ```
 
-## Run locally (Windows)
-No build needed — just open `index.html` or `movie.html` in your browser.
-- Double-click `index.html`, or
-- Right‑click the file → Open With → your browser.
+## Thèmes
 
-Tip: For the best results with module scripts and lazy images, serve over a local server. If you use VS Code:
-- Install “Live Server” (optional) and click “Go Live” on `index.html`.
+Je stocke le thème courant dans localStorage (clé : `sf_theme`) et j’applique très tôt une valeur sauvegardée pour éviter un flash visuel. Les trois thèmes ajustent couleurs de fond, contrastes, ambiance et scrollbar.
 
-## Themes
-- Toggle with the button in the header.
-- Available: dark, light, cinema.
-- Persists in `localStorage` under the key `streamflix-theme`.
+## Parallax & Hero
 
-## No-API mode vs mock API
-- By default, sections render animated skeleton posters only. This is controlled via `data-skeleton-only="true"` on each row container in `index.html` and `movie.html`.
-- To try the mock API data:
-  1) Remove `data-skeleton-only="true"` from a row you want to populate.
-  2) Ensure the page’s module script (pages/home.js or pages/movie.js) is included.
-  3) Reload: the row should fill with mock posters after a short simulated delay.
+Le hero récupère une liste de films tendances et fait tourner l’affiche toutes les 15 secondes (précharge des suivantes pour éviter le flash). Les couches (.layer-extra/back/mid/front) composent un effet de profondeur léger. J’ai ajouté une version sans le décalage vertical au scroll pour éviter un “saut” visuel.
 
-## Hover behavior (requested spec)
-- Hover widens cards horizontally and pushes siblings to the right; height stays fixed.
-- Skeleton cards behave exactly like loaded cards.
-- Implementation notes:
-  - Each row item defines a card width variable `--card-w` and height `--card-h` responsive to breakpoints.
-  - On hover/focus, width becomes `calc(var(--card-w) + min(2vw, 16px))`.
-  - Rows use `flex: 0 0 var(--card-w)` so expansion is relative and bounded.
+## Accessibilité
 
-## Scrollbars
-- Themed gray thumb; transparent track per theme.
-- Uses modern `scrollbar-color` and WebKit fallback styles.
+- Focus clavier cohérent avec le hover
+- Scroll-snap non bloquant
+- Prise en compte de la lisibilité (overlay glass + dégradés adaptatifs selon thème)
+- Fermeture du menu mobile via Échap, clic extérieur, changement de taille d’écran
 
-## Accessibility & motion
-- Focus styles mirror hover widening for keyboard users.
-- Honors `prefers-reduced-motion` to reduce animations.
+## Données / API
 
-## Mapping to brief & bonuses
-- Mobile‑first responsive layout: DONE (clamp typography, 5+ breakpoints).
-- CSS variables & theming: DONE (three themes; persist & early init fallback).
-- Elegant navigation + sticky/shrink: DONE (nav.js + CSS).
-- Hero section with impact: DONE (responsive hero with parallax touch).
-- Hover/animation effects: DONE (cards, tabs indicator, subtle transforms).
-- Skeleton loaders: DONE (animated gradient; instant display).
-- Top 10 Netflix‑style: DONE (rank numbers with stroke & shadow fallback).
-- Horizontal rows, push‑on‑hover: DONE (flex rows, width-only growth).
-- Scrollbar gray & transparent: DONE (theme‑aware colors).
-- No backend dependency: DONE (static with optional mock service).
+Le code est prêt pour l’API TMDB : clés et base URL configurées dans `window.STREAMFLIX_CONFIG`. Génération d’URL images et appels fetch centralisés (cf. objet API dans `main.js`).
 
-## Troubleshooting
-- Theme doesn’t change: clear localStorage or ensure header button is present.
-- Hover expands too much: tune the increment in `assets/css/components.css` where `min(2vw, 16px)` is defined.
-- Images don’t show: ensure you removed `data-skeleton-only` if you expect mock data; otherwise skeletons are intentional.
+## Lancer en local
 
-## License
-MIT — for learning and demo purposes.
+Pas de build. J’ouvre simplement `index.html` dans le navigateur.
+Pour un meilleur cache module / CORS : petit serveur statique (ex: Live Server VS Code) si besoin.
+
+## Personnalisation rapide
+
+- Ajuster la densité des cartes : modifier les clamps `--card-w` dans les règles `.grid.movies`
+- Changer la vitesse de rotation hero : variable dans `home.js` (intervalle 15000ms)
+- Affiner l’intensité parallax : multiplier / réduire les facteurs dans HeroEffects
+- Modifier le gradient lisibilité : bloc `.hero-content` dans `index.css`
+
+## Améliorations possibles (roadmap perso)
+
+- Gestion d’état “Ma liste” côté localStorage
+- Filtres combinés avancés (genre + année + note) avec URL sync
+- Préchargement intelligent d’images selon proximité du viewport
+- Mode hors connexion avec cache Service Worker
+
+## Licence
+
+Projet personnel libre d’inspiration / apprentissage. Utilisation libre tant que la mention est conservée.
+
+---
+
+Si tu parcours le code : j’ai volontairement gardé une approche claire, sans framework, pour montrer qu’on peut faire une UI moderne et fluide en pur vanilla.
