@@ -292,7 +292,7 @@ const HeroEffects = {
     let raf = 0;
     let px = 0,
       py = 0;
-  let sy = 0; // vertical scroll offset (will be neutralized to prevent jump)
+    let sy = 0; // vertical scroll offset (will be neutralized to prevent jump)
     let inView = true;
 
     const apply = () => {
@@ -309,7 +309,9 @@ const HeroEffects = {
           const tx = inView ? px * depth : 0;
           // Removed scroll-based vertical shift to avoid 'mounting' jump
           const ty = inView ? py * depth : 0;
-          el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px)`;
+          el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(
+            1
+          )}px)`;
         });
       });
     };
