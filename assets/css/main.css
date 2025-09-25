@@ -687,21 +687,72 @@ section[id] {
 }
 .grid.top10 .movie-card {
   counter-increment: rank;
+  position: relative;
 }
+
+/* Pastilles de classement */
 .grid.top10 .movie-card::before {
-  margin: 10px;
   content: counter(rank);
   position: absolute;
-  left: -0.25rem;
-  bottom: 2.5rem;
-  z-index: 2;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: transparent;
-  -webkit-text-stroke: 2px color-mix(in srgb, var(--primary) 85%, #ffffff00);
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-400);
+  font-weight: 700;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--border);
+  transition: all var(--dur-2) var(--ease-std);
+  opacity: 0;
 }
+
+/* Pastilles toujours visibles pour le podium (1,2,3) */
+.grid.top10 .movie-card:nth-child(1)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  border-color: #ffd700;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.grid.top10 .movie-card:nth-child(2)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+  color: #000;
+  border-color: #c0c0c0;
+  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
+}
+
+.grid.top10 .movie-card:nth-child(3)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #cd7f32, #d2691e);
+  color: white;
+  border-color: #cd7f32;
+  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
+}
+
+/* Pastilles visibles au hover pour les autres positions (4-10) */
+.grid.top10 .movie-card:nth-child(n+4):hover::before,
+.grid.top10 .movie-card:nth-child(n+4):focus-within::before {
+  opacity: 1;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
+/* Animation au hover pour toutes les pastilles */
+.grid.top10 .movie-card:hover::before,
+.grid.top10 .movie-card:focus-within::before {
+  transform: scale(1.1);
+}
+
 .grid.top10 .movie-card > * {
   position: relative;
   z-index: 1;
