@@ -144,11 +144,11 @@ async function fetchMovies(page = 1) {
     const movies = data.results || [];
     totalPages = Math.min(data.total_pages || 1, 500);
 
-  if (page === 1) {
+    if (page === 1) {
       grid.innerHTML = "";
     }
 
-  if (movies.length === 0) {
+    if (movies.length === 0) {
       if (page === 1) {
         grid.innerHTML =
           '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
@@ -161,7 +161,7 @@ async function fetchMovies(page = 1) {
         grid.append(card);
       });
 
-  const totalResults = Math.min(data.total_results || 0, 10000); // limite API TMDB
+      const totalResults = Math.min(data.total_results || 0, 10000); // limite API TMDB
       resultsCount.textContent = `${totalResults.toLocaleString()} film${
         totalResults > 1 ? "s" : ""
       }`;

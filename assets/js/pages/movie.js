@@ -131,7 +131,7 @@ async function loadCast(movieId) {
     const credits = await tmdbApi.getMovieCredits(movieId);
     const castGrid = $.qs("#castGrid");
 
-  // Réalisateur
+    // Réalisateur
     const director = credits.crew?.find((person) => person.job === "Director");
     if (director) {
       $.qs("#movieDirector").textContent = director.name;

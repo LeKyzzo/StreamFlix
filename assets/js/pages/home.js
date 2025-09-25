@@ -211,7 +211,7 @@ async function loadHeroRotation() {
         setHeroContent(heroList[heroPos]);
       }, HERO_ROTATION_INTERVAL);
 
-  // Pause quand onglet caché
+      // Pause quand onglet caché
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           if (heroRotationTimer) {

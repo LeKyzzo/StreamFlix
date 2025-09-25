@@ -243,7 +243,7 @@ const Navigation = {
 
     toggle.addEventListener("click", toggleNav);
 
-  // Ferme après clic sur un lien (mobile)
+    // Ferme après clic sur un lien (mobile)
     nav.addEventListener("click", (e) => {
       const a = e.target.closest("a.nav-link");
       if (a && window.innerWidth < 720) {
@@ -252,19 +252,19 @@ const Navigation = {
       }
     });
 
-  // Échap => fermer
+    // Échap => fermer
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeNav();
     });
 
-  // Clic extérieur => fermer
+    // Clic extérieur => fermer
     document.addEventListener("click", (e) => {
       if (!root.classList.contains("nav-open")) return;
       const within = e.target.closest("#primary-navigation, #nav-toggle");
       if (!within) closeNav();
     });
 
-  // Resize => reset état
+    // Resize => reset état
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 720) {
         closeNav();
@@ -292,7 +292,7 @@ const HeroEffects = {
     let raf = 0;
     let px = 0,
       py = 0;
-  let sy = 0; // vertical désactivé (évite le saut)
+    let sy = 0; // vertical désactivé (évite le saut)
     let inView = true;
 
     const apply = () => {
