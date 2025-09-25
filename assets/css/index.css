@@ -89,7 +89,7 @@ html[data-theme="light"] .hero::after {
 }
 
 /* Overlap section tendances */
-section#tendances {
+section#top10 {
   margin-top: -15vh;
   position: relative;
   z-index: 2;
