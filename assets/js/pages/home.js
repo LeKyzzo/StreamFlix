@@ -118,6 +118,7 @@ function setHeroContent(movie) {
   const layerExtra = document.querySelector(".poster-layer.layer-extra");
   const heroSection = document.getElementById("hero");
   const heroContent = document.querySelector(".hero-content");
+  const heroBackdropImg = document.getElementById("heroBackdrop");
   if (!titleEl || !subEl) return;
 
   // Fade out
@@ -178,12 +179,18 @@ function setHeroContent(movie) {
     }
   }
   // Fond global (gradient + backdrop)
-  if (heroSection && movie.backdrop_path) {
+  if (heroBackdropImg && movie.backdrop_path) {
     const bgBackdrop = buildImageUrl(
       movie.backdrop_path,
-      TMDB_CONFIG.TMDB_IMAGE_SIZES.BACKDROP.LARGE // supposé correspondre à ~1280
+      TMDB_CONFIG.TMDB_IMAGE_SIZES.BACKDROP.LARGE
     );
-    heroSection.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.70) 100%), url(${bgBackdrop})`;
+    heroBackdropImg.style.opacity = 0;
+    const preload = new Image();
+    preload.src = bgBackdrop;
+    preload.onload = () => {
+      heroBackdropImg.src = bgBackdrop;
+      requestAnimationFrame(() => (heroBackdropImg.style.opacity = 1));
+    };
   }
 
   // Fade in
