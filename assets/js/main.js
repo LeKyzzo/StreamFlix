@@ -292,7 +292,7 @@ const HeroEffects = {
     let raf = 0;
     let px = 0,
       py = 0;
-    let sy = 0;
+  let sy = 0; // vertical scroll offset (will be neutralized to prevent jump)
     let inView = true;
 
     const apply = () => {
@@ -307,10 +307,9 @@ const HeroEffects = {
         layers.forEach((el, i) => {
           const depth = (i + 1) * 8;
           const tx = inView ? px * depth : 0;
-          const ty = (inView ? py * depth : 0) + sy * (i + 1);
-          el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(
-            1
-          )}px)`;
+          // Removed scroll-based vertical shift to avoid 'mounting' jump
+          const ty = inView ? py * depth : 0;
+          el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px)`;
         });
       });
     };
@@ -349,18 +348,8 @@ const HeroEffects = {
       io.observe(media);
     }
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!inView) return;
-        const rect = media.getBoundingClientRect();
-        const offset = -rect.top;
-        const raw = offset * 0.08;
-        sy = Math.max(-50, Math.min(50, raw));
-        apply();
-      },
-      { passive: true }
-    );
+    // Scroll effect disabled (was causing vertical jump). If needed later,
+    // re-enable with a softer factor & clamped only when user not near top.
   },
 };
 

@@ -375,6 +375,12 @@ section[id] {
   scroll-margin-top: calc(var(--header-offset, 64px) + 12px);
 }
 
+/* Page offset helper for pages without hero behind header */
+.page-offset {
+  /* Use dynamic header height + some breathing space */
+  padding-top: calc(var(--header-offset, 64px) + var(--space-5));
+}
+
 /* ============================================================================
    COMPONENTS - BUTTONS, CARDS, TABS, etc.
    ========================================================================== */
