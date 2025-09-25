@@ -57,8 +57,12 @@ function setMovieDetails(movie) {
 
   // Movie info grid (new fields)
   $.qs("#movieDirector").textContent = "—"; // Will be set from credits
-  $.qs("#movieBudget").textContent = movie.budget ? format.money(movie.budget) : "—";
-  $.qs("#movieRevenue").textContent = movie.revenue ? format.money(movie.revenue) : "—";
+  $.qs("#movieBudget").textContent = movie.budget
+    ? format.money(movie.budget)
+    : "—";
+  $.qs("#movieRevenue").textContent = movie.revenue
+    ? format.money(movie.revenue)
+    : "—";
   $.qs("#movieStatus").textContent = getStatusText(movie.status) || "—";
 
   // Genres
@@ -128,7 +132,7 @@ async function loadCast(movieId) {
     const castGrid = $.qs("#castGrid");
 
     // Find director in crew
-    const director = credits.crew?.find(person => person.job === "Director");
+    const director = credits.crew?.find((person) => person.job === "Director");
     if (director) {
       $.qs("#movieDirector").textContent = director.name;
     }
