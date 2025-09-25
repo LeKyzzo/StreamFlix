@@ -3,22 +3,22 @@
 /* Movie hero */
 .movie-hero {
   padding-block: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 .movie-hero-grid {
   display: grid;
-  gap: var(--space-5);
-  grid-template-columns: 1fr;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-6);
+  align-items: start;
 }
 .movie-poster {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/3;
   border-radius: var(--radius-l);
   box-shadow: var(--shadow);
   background: #222;
   background-size: cover;
   background-position: center;
-  min-height: 140px;
-  max-height: clamp(160px, 28vw, 260px);
 }
 .movie-details {
   display: grid;
@@ -190,6 +190,15 @@
 }
 
 @media (max-width: 768px) {
+  .movie-hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    text-align: center;
+  }
+  .movie-poster {
+    max-width: 250px;
+    justify-self: center;
+  }
   .overview-stats {
     flex-direction: column;
     gap: var(--space-2);

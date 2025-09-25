@@ -70,76 +70,78 @@
               <button class="btn ghost" id="trailerBtn">Bande-annonce</button>
               <button class="btn ghost" id="addBtn">+ Ma liste</button>
             </div>
+          </div>
+        </div>
 
-            <div class="tabs" data-tabs>
-              <div class="tabs-list" role="tablist">
-                <button
-                  role="tab"
-                  aria-selected="true"
-                  data-tab="overview"
-                  class="tab-btn"
-                >
-                  Aperçu
-                </button>
-                <button
-                  role="tab"
-                  aria-selected="false"
-                  data-tab="cast"
-                  class="tab-btn"
-                >
-                  Distribution
-                </button>
-                <button
-                  role="tab"
-                  aria-selected="false"
-                  data-tab="videos"
-                  class="tab-btn"
-                >
-                  Vidéos
-                </button>
-                <button
-                  role="tab"
-                  aria-selected="false"
-                  data-tab="details"
-                  class="tab-btn"
-                >
-                  Détails
-                </button>
-              </div>
-              <div class="tab-panels">
-                <section id="tab-overview" class="tab-panel is-active">
-                  <ul class="chips" id="movieGenres"></ul>
-                  <div class="overview-stats">
-                    <div class="stat-item">
-                      <span class="stat-label">Note</span>
-                      <span class="stat-value" id="movieRating">—</span>
-                    </div>
-                    <div class="stat-item">
-                      <span class="stat-label">Votes</span>
-                      <span class="stat-value" id="movieVotes">—</span>
-                    </div>
-                    <div class="stat-item">
-                      <span class="stat-label">Popularité</span>
-                      <span class="stat-value" id="moviePopularity">—</span>
-                    </div>
-                  </div>
-                </section>
-                <section id="tab-cast" class="tab-panel">
-                  <div class="cast-grid" id="castGrid">
-                    <div class="loading">Chargement...</div>
-                  </div>
-                </section>
-                <section id="tab-videos" class="tab-panel">
-                  <div class="videos-grid" id="videosGrid">
-                    <div class="loading">Chargement...</div>
-                  </div>
-                </section>
-                <section id="tab-details" class="tab-panel">
-                  <dl class="metadata" id="movieDetails"></dl>
-                </section>
-              </div>
-              <div class="tabs-indicator" aria-hidden="true"></div>
+        <div class="container">
+          <div class="tabs" data-tabs>
+            <div class="tabs-list" role="tablist">
+              <button
+                role="tab"
+                aria-selected="true"
+                data-tab="overview"
+                class="tab-btn"
+              >
+                Aperçu
+              </button>
+              <button
+                role="tab"
+                aria-selected="false"
+                data-tab="cast"
+                class="tab-btn"
+              >
+                Distribution
+              </button>
+              <button
+                role="tab"
+                aria-selected="false"
+                data-tab="videos"
+                class="tab-btn"
+              >
+                Vidéos
+              </button>
+              <button
+                role="tab"
+                aria-selected="false"
+                data-tab="details"
+                class="tab-btn"
+              >
+                Détails
+              </button>
             </div>
+            <div class="tab-panels">
+              <section id="tab-overview" class="tab-panel is-active">
+                <ul class="chips" id="movieGenres"></ul>
+                <div class="overview-stats">
+                  <div class="stat-item">
+                    <span class="stat-label">Note</span>
+                    <span class="stat-value" id="movieRating">—</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Votes</span>
+                    <span class="stat-value" id="movieVotes">—</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Popularité</span>
+                    <span class="stat-value" id="moviePopularity">—</span>
+                  </div>
+                </div>
+              </section>
+              <section id="tab-cast" class="tab-panel">
+                <div class="cast-grid" id="castGrid">
+                  <div class="loading">Chargement...</div>
+                </div>
+              </section>
+              <section id="tab-videos" class="tab-panel">
+                <div class="videos-grid" id="videosGrid">
+                  <div class="loading">Chargement...</div>
+                </div>
+              </section>
+              <section id="tab-details" class="tab-panel">
+                <dl class="metadata" id="movieDetails"></dl>
+              </section>
+            </div>
+            <div class="tabs-indicator" aria-hidden="true"></div>
           </div>
         </div>
       </section>
