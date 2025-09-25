@@ -177,13 +177,13 @@ function setHeroContent(movie) {
       layerExtra.style.backgroundPosition = "center";
     }
   }
-    // Fond global (gradient + backdrop)
-    if (heroSection && movie.backdrop_path) {
-      const bgBackdrop = buildImageUrl(
-        movie.backdrop_path,
-        TMDB_CONFIG.TMDB_IMAGE_SIZES.BACKDROP.LARGE // supposé correspondre à ~1280
-      );
-      heroSection.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.70) 100%), url(${bgBackdrop})`;
+  // Fond global (gradient + backdrop)
+  if (heroSection && movie.backdrop_path) {
+    const bgBackdrop = buildImageUrl(
+      movie.backdrop_path,
+      TMDB_CONFIG.TMDB_IMAGE_SIZES.BACKDROP.LARGE // supposé correspondre à ~1280
+    );
+    heroSection.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.70) 100%), url(${bgBackdrop})`;
   }
 
   // Fade in
