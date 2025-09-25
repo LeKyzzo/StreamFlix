@@ -739,8 +739,8 @@ section[id] {
 }
 
 /* Pastilles visibles au hover pour les autres positions (4-10) */
-.grid.top10 .movie-card:nth-child(n+4):hover::before,
-.grid.top10 .movie-card:nth-child(n+4):focus-within::before {
+.grid.top10 .movie-card:nth-child(n + 4):hover::before,
+.grid.top10 .movie-card:nth-child(n + 4):focus-within::before {
   opacity: 1;
   background: var(--primary);
   border-color: var(--primary);
