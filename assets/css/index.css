@@ -106,7 +106,7 @@ section#tendances {
 .poster-layer {
   position: absolute;
   inset: auto 0 0 auto;
-  width: 50%;
+  width: 45%;
   height: 100%;
   border-radius: var(--radius-l);
   box-shadow: var(--shadow);
@@ -284,13 +284,13 @@ section#tendances {
     height: 320px;
   }
   .grid.movies > * {
-    --card-w: clamp(200px, 20vw, 260px);
+    --card-w: clamp(170px, 16.5vw, 220px);
     width: var(--card-w);
     flex-basis: var(--card-w);
-    --card-h: 260px;
+    --card-h: 240px;
   }
   .grid.movies.landscape > * {
-    --card-w: clamp(220px, 26vw, 320px);
+    --card-w: clamp(190px, 21vw, 280px);
     --card-h: calc(var(--card-w) * 9 / 16);
   }
 }
@@ -324,26 +324,26 @@ section#tendances {
     grid-template-columns: 1.1fr 0.9fr;
   }
   .grid.movies > * {
-    --card-w: clamp(220px, 18vw, 280px);
+    --card-w: clamp(190px, 15.5vw, 240px);
     width: var(--card-w);
     flex-basis: var(--card-w);
-    --card-h: 280px;
+    --card-h: 250px;
   }
   .grid.movies.landscape > * {
-    --card-w: clamp(240px, 22vw, 340px);
+    --card-w: clamp(210px, 18vw, 300px);
     --card-h: calc(var(--card-w) * 9 / 16);
   }
 }
 
 @media (min-width: 1440px) {
   .grid.movies > * {
-    --card-w: 280px;
+    --card-w: 240px;
     width: var(--card-w);
     flex-basis: var(--card-w);
-    --card-h: 300px;
+    --card-h: 260px;
   }
   .grid.movies.landscape > * {
-    --card-w: 280px;
+    --card-w: 260px;
     --card-h: calc(var(--card-w) * 9 / 16);
   }
 }
