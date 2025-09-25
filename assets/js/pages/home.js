@@ -113,11 +113,11 @@ function setHeroContent(movie) {
   const playEl = document.getElementById("heroPlayBtn");
   const kickerEl = document.getElementById("heroKicker");
   const posterLayer = document.getElementById("heroPosterlayer");
-  const layerMid = document.querySelector('.poster-layer.layer-mid');
-  const layerBack = document.querySelector('.poster-layer.layer-back');
-  const layerExtra = document.querySelector('.poster-layer.layer-extra');
+  const layerMid = document.querySelector(".poster-layer.layer-mid");
+  const layerBack = document.querySelector(".poster-layer.layer-back");
+  const layerExtra = document.querySelector(".poster-layer.layer-extra");
   const heroSection = document.getElementById("hero");
-  const heroContent = document.querySelector('.hero-content');
+  const heroContent = document.querySelector(".hero-content");
   if (!titleEl || !subEl) return;
 
   // Fade out
@@ -126,7 +126,8 @@ function setHeroContent(movie) {
   titleEl.textContent = movie.title || movie.name || "Sans titre";
   const raw = movie.overview || "Aucune description disponible.";
   const maxLen = 260;
-  subEl.textContent = raw.length > maxLen ? raw.slice(0, maxLen - 1) + "…" : raw;
+  subEl.textContent =
+    raw.length > maxLen ? raw.slice(0, maxLen - 1) + "…" : raw;
   if (playEl) playEl.href = `movie.html?id=${movie.id}`;
   if (kickerEl) kickerEl.textContent = "Tendance";
 
@@ -143,28 +144,37 @@ function setHeroContent(movie) {
   if (heroList.length > 1) {
     const next1 = heroList[(heroPos + 1) % heroList.length];
     if (layerMid && next1?.poster_path) {
-      const p1 = buildImageUrl(next1.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM);
+      const p1 = buildImageUrl(
+        next1.poster_path,
+        TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM
+      );
       layerMid.style.backgroundImage = `linear-gradient(135deg, #fff1, transparent), url(${p1})`;
-      layerMid.style.backgroundSize = 'cover';
-      layerMid.style.backgroundPosition = 'center';
+      layerMid.style.backgroundSize = "cover";
+      layerMid.style.backgroundPosition = "center";
     }
   }
   if (heroList.length > 2) {
     const next2 = heroList[(heroPos + 2) % heroList.length];
     if (layerBack && next2?.poster_path) {
-      const p2 = buildImageUrl(next2.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM);
+      const p2 = buildImageUrl(
+        next2.poster_path,
+        TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM
+      );
       layerBack.style.backgroundImage = `linear-gradient(135deg, #fff1, transparent), url(${p2})`;
-      layerBack.style.backgroundSize = 'cover';
-      layerBack.style.backgroundPosition = 'center';
+      layerBack.style.backgroundSize = "cover";
+      layerBack.style.backgroundPosition = "center";
     }
   }
   if (heroList.length > 3) {
     const next3 = heroList[(heroPos + 3) % heroList.length];
     if (layerExtra && next3?.poster_path) {
-      const p3 = buildImageUrl(next3.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM);
+      const p3 = buildImageUrl(
+        next3.poster_path,
+        TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM
+      );
       layerExtra.style.backgroundImage = `linear-gradient(135deg, #0006, transparent), url(${p3})`;
-      layerExtra.style.backgroundSize = 'cover';
-      layerExtra.style.backgroundPosition = 'center';
+      layerExtra.style.backgroundSize = "cover";
+      layerExtra.style.backgroundPosition = "center";
     }
   }
   // Utiliser l'affiche en plein fond (pas de duplication avec layer-front) => on peut flouter l'arrière plan si besoin

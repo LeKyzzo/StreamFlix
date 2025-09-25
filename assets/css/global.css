@@ -115,7 +115,9 @@ body {
   overflow-x: hidden;
 }
 
-main { padding-top: 0; }
+main {
+  padding-top: 0;
+}
 
 .container {
   width: 100%;
@@ -179,8 +181,25 @@ a:hover {
    LAYOUT - HEADER, HERO, GRIDS, FOOTER
    ========================================================================== */
 
-.site-header { position: fixed; inset: 0 0 auto 0; z-index: var(--z-header); background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0)); border-bottom: 1px solid color-mix(in srgb, var(--border) 18%, transparent); transition: background-color var(--dur-3), border-color var(--dur-3), box-shadow var(--dur-3), backdrop-filter var(--dur-3), background var(--dur-3); backdrop-filter: blur(12px) saturate(1.15); -webkit-backdrop-filter: blur(12px) saturate(1.15); }
-.site-header.scrolled { background: color-mix(in srgb, var(--bg-elev) 92%, transparent); backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); box-shadow: 0 6px 24px -10px rgba(0,0,0,0.55); border-bottom-color: color-mix(in srgb, var(--border) 75%, transparent); }
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 18%, transparent);
+  transition: background-color var(--dur-3), border-color var(--dur-3),
+    box-shadow var(--dur-3), backdrop-filter var(--dur-3),
+    background var(--dur-3);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+}
+.site-header.scrolled {
+  background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 6px 24px -10px rgba(0, 0, 0, 0.55);
+  border-bottom-color: color-mix(in srgb, var(--border) 75%, transparent);
+}
 @keyframes headerFade {
   from {
     opacity: 0;
@@ -257,8 +276,14 @@ a:hover {
 }
 
 /* Mobile nav toggle visibility */
-.mobile-only { display: inline-flex; }
-@media (min-width: 720px) { .mobile-only { display: none !important; } }
+.mobile-only {
+  display: inline-flex;
+}
+@media (min-width: 720px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
 
 /* Collapsible mobile nav */
 @media (max-width: 719.98px) {
@@ -280,7 +305,10 @@ a:hover {
     transform: translateY(-10px);
     pointer-events: none;
     border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
-    transition: max-height var(--dur-3) var(--ease-std), opacity var(--dur-2) var(--ease-std), transform var(--dur-3) var(--ease-std), padding var(--dur-2) var(--ease-std);
+    transition: max-height var(--dur-3) var(--ease-std),
+      opacity var(--dur-2) var(--ease-std),
+      transform var(--dur-3) var(--ease-std),
+      padding var(--dur-2) var(--ease-std);
   }
   .nav-open #primary-navigation {
     max-height: 480px; /* large enough for links */
@@ -289,10 +317,17 @@ a:hover {
     pointer-events: auto;
   }
   /* Prevent body scroll when nav is open */
-  .nav-open body { overflow: hidden; }
+  .nav-open body {
+    overflow: hidden;
+  }
   /* Improve tap targets */
-  #primary-navigation .nav-link { padding: 0.6rem 0; font-size: var(--fs-500); }
-  #primary-navigation .nav-sep { display: none; }
+  #primary-navigation .nav-link {
+    padding: 0.6rem 0;
+    font-size: var(--fs-500);
+  }
+  #primary-navigation .nav-sep {
+    display: none;
+  }
 }
 
 /* Footer */
