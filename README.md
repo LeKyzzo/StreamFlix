@@ -56,8 +56,85 @@ Le code est prêt pour l’API TMDB : clés et base URL configurées dans `windo
 
 ## Lancer en local
 
-Pas de build. J’ouvre simplement `index.html` dans le navigateur.
-Pour un meilleur cache module / CORS : petit serveur statique (ex: Live Server VS Code) si besoin.
+Les scripts utilisent des modules ES (`<script type="module">`). Certains navigateurs bloquent les imports de modules via le protocole `file://` (chemins relatifs, origin différente, CORS). Il faut donc idéalement servir le dossier via un petit serveur HTTP local.
+
+Méthodes possibles :
+
+### 1. Extension Live Server (VS Code)
+
+La plus simple.
+
+1. Ouvrir le dossier dans VS Code.
+2. Installer l’extension “Live Server”.
+3. Ouvrir `index.html` et cliquer sur “Go Live”.
+4. Accéder à l’URL locale (souvent `http://127.0.0.1:5500/`).
+
+### 2. Python (intégré sur beaucoup de systèmes)
+
+Depuis la racine du projet :
+
+Python 3.x :
+
+```bash
+python -m http.server 5173
+```
+
+Ou selon l’installation :
+
+```bash
+py -m http.server 5173
+```
+
+Puis ouvrir: http://localhost:5173
+
+### 3. Node.js (sans dépendances)
+
+Utilisation rapide avec un script one‑liner HTTP (Node 18+):
+
+```bash
+node -e "require('http').createServer((req,res)=>{const fs=require('fs');const p=require('path');let f=p.join(process.cwd(), req.url.split('?')[0]); if(fs.statSync(process.cwd()).isDirectory() && f.endsWith('/')) f+='index.html'; if(fs.existsSync(f) && fs.statSync(f).isFile()){res.writeHead(200);res.end(fs.readFileSync(f));} else {try{const idx=p.join(process.cwd(),'index.html');res.writeHead(200);res.end(fs.readFileSync(idx));}catch(e){res.writeHead(404);res.end('Not found');}}).listen(5173)"
+```
+
+Puis http://localhost:5173
+
+Ou plus lisible (créer un fichier `serve.mjs`) :
+
+```js
+import { createServer } from "http";
+import { stat, readFile } from "fs/promises";
+import { join } from "path";
+
+createServer(async (req, res) => {
+  const urlPath = req.url.split("?")[0];
+  let filePath = join(process.cwd(), urlPath === "/" ? "/index.html" : urlPath);
+  try {
+    const s = await stat(filePath);
+    if (s.isDirectory()) filePath = join(filePath, "index.html");
+    const data = await readFile(filePath);
+    res.writeHead(200);
+    res.end(data);
+  } catch (e) {
+    res.writeHead(404);
+    res.end("Not found");
+  }
+}).listen(5173, () => console.log("Serveur sur http://localhost:5173"));
+```
+
+Puis :
+
+```bash
+node serve.mjs
+```
+
+### 4. npx serve (si Node installé)
+
+```bash
+npx serve -p 5173 .
+```
+
+---
+
+Accès direct via double‑clic peut fonctionner, mais si tu vois des erreurs du style `Failed to load module script` ou `CORS` dans la console → passe à une des méthodes ci‑dessus.
 
 ## Personnalisation rapide
 
@@ -76,7 +153,3 @@ Pour un meilleur cache module / CORS : petit serveur statique (ex: Live Server V
 ## Licence
 
 Projet personnel libre d’inspiration / apprentissage. Utilisation libre tant que la mention est conservée.
-
----
-
-Si tu parcours le code : j’ai volontairement gardé une approche claire, sans framework, pour montrer qu’on peut faire une UI moderne et fluide en pur vanilla.
