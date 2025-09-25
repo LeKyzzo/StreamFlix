@@ -597,6 +597,33 @@ section[id] {
 .grid.movies.top10 {
   gap: var(--space-4);
 }
+
+/* Réduction supplémentaire pour toutes les grilles sauf Top 10 */
+.grid.movies:not(.top10) > * {
+  --card-w: clamp(120px, 28vw, 150px);
+  --card-h: 200px;
+}
+
+@media (min-width: 720px) {
+  .grid.movies:not(.top10) > * {
+    --card-w: clamp(140px, 18vw, 170px);
+    --card-h: 220px;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid.movies:not(.top10) > * {
+    --card-w: clamp(160px, 14vw, 190px);
+    --card-h: 235px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid.movies:not(.top10) > * {
+    --card-w: 200px;
+    --card-h: 250px;
+  }
+}
 .grid.movies.landscape > * {
   --card-w: clamp(180px, 30vw, 260px);
   width: var(--card-w);
