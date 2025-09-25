@@ -300,7 +300,8 @@ section#tendances {
     margin-inline: auto;
   }
   .hero-grid {
-    text-align: left;
+    text-align: center; /* centrage contenu sur mobile */
+    justify-items: center;
   }
   .hero-media .poster-layer {
     width: 60%;
@@ -333,6 +334,16 @@ section#tendances {
     --card-w: clamp(210px, 18vw, 300px);
     --card-h: calc(var(--card-w) * 9 / 16);
   }
+}
+
+/* < 960px : on retire l'effet parallax et on peut masquer la pile d'images si souhaité */
+@media (max-width: 959.98px) {
+  .parallax-tilt { animation: none; }
+  /* Si tu veux garder l'image, commente la ligne suivante */
+  .hero-media { display: none; }
+  .hero-grid { text-align: center; }
+  .hero-content { margin-inline: auto; }
+  .hero-actions { justify-content: center; }
 }
 
 @media (min-width: 1440px) {
