@@ -55,6 +55,12 @@ function setMovieDetails(movie) {
   $.qs("#movieOverview").textContent =
     movie.overview || "Aucune description disponible.";
 
+  // Movie info grid (new fields)
+  $.qs("#movieDirector").textContent = "—"; // Will be set from credits
+  $.qs("#movieBudget").textContent = movie.budget ? format.money(movie.budget) : "—";
+  $.qs("#movieRevenue").textContent = movie.revenue ? format.money(movie.revenue) : "—";
+  $.qs("#movieStatus").textContent = getStatusText(movie.status) || "—";
+
   // Genres
   const genresContainer = $.qs("#movieGenres");
   genresContainer.innerHTML = "";
@@ -120,6 +126,12 @@ async function loadCast(movieId) {
   try {
     const credits = await tmdbApi.getMovieCredits(movieId);
     const castGrid = $.qs("#castGrid");
+
+    // Find director in crew
+    const director = credits.crew?.find(person => person.job === "Director");
+    if (director) {
+      $.qs("#movieDirector").textContent = director.name;
+    }
 
     if (!credits.cast || credits.cast.length === 0) {
       castGrid.innerHTML =

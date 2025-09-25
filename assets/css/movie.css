@@ -23,6 +23,7 @@
 .movie-details {
   display: grid;
   gap: var(--space-3);
+  max-width: 90%;
 }
 .movie-title {
   font-size: var(--fs-700);
@@ -34,11 +35,35 @@
 }
 .movie-overview {
   margin: 0;
+  line-height: 1.6;
+  max-width: 85%;
+}
+.movie-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.info-label {
+  font-size: var(--fs-200);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+.info-value {
+  font-weight: 400;
 }
 .movie-actions {
   display: flex;
   gap: var(--space-3);
   flex-wrap: wrap;
+  margin-top: var(--space-2);
 }
 
 .metadata {
@@ -198,6 +223,16 @@
   .movie-poster {
     max-width: 250px;
     justify-self: center;
+  }
+  .movie-details {
+    max-width: 100%;
+  }
+  .movie-overview {
+    max-width: 100%;
+  }
+  .movie-info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
   .overview-stats {
     flex-direction: column;
