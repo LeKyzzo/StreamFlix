@@ -73,9 +73,6 @@ function cardFromMovie(m) {
 
 function loaderForCollection(name) {
   switch ((name || "").toLowerCase()) {
-    case "trending":
-    case "tendances":
-      return () => tmdbApi.getTrendingMovies("week");
     case "popular":
     case "populaires":
       return () => tmdbApi.discoverMovies(1, { sort_by: "popularity.desc" });
@@ -94,12 +91,14 @@ function loaderForCollection(name) {
           sort_by: "primary_release_date.desc",
           "vote_count.gte": 50,
         });
-    default:
+    case "top10":
       return () => tmdbApi.getTrendingMovies("week");
+    default:
+      return () => tmdbApi.discoverMovies(1, { sort_by: "popularity.desc" });
   }
 }
 
-// Rotation hero (tendances)
+// Rotation hero (pool week, libellé renommé)
 const HERO_ROTATION_ENABLED = true; // on/off
 const HERO_ROTATION_INTERVAL = 15000; // 15s
 const HERO_FADE_DURATION = 600; // ms transition
@@ -130,7 +129,7 @@ function setHeroContent(movie) {
   subEl.textContent =
     raw.length > maxLen ? raw.slice(0, maxLen - 1) + "…" : raw;
   if (playEl) playEl.href = `movie.html?id=${movie.id}`;
-  if (kickerEl) kickerEl.textContent = "Tendance";
+  if (kickerEl) kickerEl.textContent = "Sélection";
 
   if (posterLayer && movie.poster_path) {
     const posterUrl = buildImageUrl(
