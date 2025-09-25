@@ -92,7 +92,9 @@ html[data-theme="cinema"] {
    BASE STYLES
    ========================================================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -558,7 +560,8 @@ section[id] {
   object-fit: cover;
   display: block;
   opacity: 0;
-  transition: opacity var(--dur-2) var(--ease-std), transform var(--dur-2) var(--ease-std);
+  transition: opacity var(--dur-2) var(--ease-std),
+    transform var(--dur-2) var(--ease-std);
 }
 .card-meta {
   padding: 0.6rem 0.75rem;
@@ -998,7 +1001,8 @@ section[id] {
 
 /* Tilt animation */
 @keyframes tilt {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg);
   }
   25% {

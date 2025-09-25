@@ -27,24 +27,36 @@ function cardFromMovie(m) {
   const a = node.querySelector("a.card-media-wrap");
   a.href = `movie.html?id=${m.id}`;
 
-  const poster342 = buildImageUrl(m.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM);
-  const poster500 = buildImageUrl(m.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.LARGE);
+  const poster342 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM
+  );
+  const poster500 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.LARGE
+  );
 
   const img = node.querySelector("img.card-img");
   const webp = node.querySelector('source[type="image/webp"]');
   const avif = node.querySelector('source[type="image/avif"]');
 
-  img.src = poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
+  img.src =
+    poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
   img.srcset = poster342 && poster500 ? `${poster342} 1x, ${poster500} 2x` : "";
   if (webp) webp.srcset = img.srcset || poster342 || "";
   if (avif) avif.srcset = img.srcset || poster342 || "";
 
-  img.addEventListener("load", () => {
-    img.classList.remove("skeleton");
-    img.style.opacity = "1";
-  }, { once: true });
+  img.addEventListener(
+    "load",
+    () => {
+      img.classList.remove("skeleton");
+      img.style.opacity = "1";
+    },
+    { once: true }
+  );
 
-  node.querySelector(".card-title").textContent = m.title || m.name || "Sans titre";
+  node.querySelector(".card-title").textContent =
+    m.title || m.name || "Sans titre";
   const year = format.year(m.release_date || m.first_air_date);
   node.querySelector(".card-subtitle").textContent = year;
 
@@ -69,17 +81,19 @@ function loaderForCollection(name) {
       return () => tmdbApi.discoverMovies(1, { sort_by: "popularity.desc" });
     case "toprated":
     case "mieux-notes":
-      return () => tmdbApi.discoverMovies(1, {
-        sort_by: "vote_average.desc",
-        "vote_count.gte": 1000,
-      });
+      return () =>
+        tmdbApi.discoverMovies(1, {
+          sort_by: "vote_average.desc",
+          "vote_count.gte": 1000,
+        });
     case "recent":
     case "recents":
     case "now":
-      return () => tmdbApi.discoverMovies(1, {
-        sort_by: "primary_release_date.desc",
-        "vote_count.gte": 50,
-      });
+      return () =>
+        tmdbApi.discoverMovies(1, {
+          sort_by: "primary_release_date.desc",
+          "vote_count.gte": 50,
+        });
     default:
       return () => tmdbApi.getTrendingMovies("week");
   }
@@ -93,7 +107,7 @@ async function renderCollection(grid) {
   grid.innerHTML = "";
   for (let i = 0; i < count; i++) grid.append(skeletonCard());
 
-  // Mode "skeleton only" 
+  // Mode "skeleton only"
   if (grid.dataset.skeletonOnly === "true") {
     return;
   }

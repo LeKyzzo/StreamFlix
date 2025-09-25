@@ -35,27 +35,40 @@ function cardFromMovie(m) {
   const a = node.querySelector("a.card-media-wrap");
   a.href = `movie.html?id=${m.id}`;
 
-  const poster342 = buildImageUrl(m.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM);
-  const poster500 = buildImageUrl(m.poster_path, TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.LARGE);
+  const poster342 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.MEDIUM
+  );
+  const poster500 = buildImageUrl(
+    m.poster_path,
+    TMDB_CONFIG.TMDB_IMAGE_SIZES.POSTER.LARGE
+  );
 
   const img = node.querySelector("img.card-img");
-  img.src = poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
+  img.src =
+    poster342 || "https://placehold.co/300x450/222/888?text=Aucune+image";
   img.srcset = poster342 && poster500 ? `${poster342} 1x, ${poster500} 2x` : "";
   img.alt = `Affiche de ${m.title || m.name || "film"}`;
 
-  img.addEventListener("load", () => {
-    img.classList.remove("skeleton");
-    img.style.opacity = "1";
-  }, { once: true });
+  img.addEventListener(
+    "load",
+    () => {
+      img.classList.remove("skeleton");
+      img.style.opacity = "1";
+    },
+    { once: true }
+  );
 
-  node.querySelector(".card-title").textContent = m.title || m.name || "Sans titre";
+  node.querySelector(".card-title").textContent =
+    m.title || m.name || "Sans titre";
   const year = format.year(m.release_date || m.first_air_date);
-  const genreNames = m.genre_ids
-    ?.map((id) => genres.find((g) => g.id === id)?.name)
-    .filter(Boolean)
-    .slice(0, 2)
-    .join(", ") || "";
-  
+  const genreNames =
+    m.genre_ids
+      ?.map((id) => genres.find((g) => g.id === id)?.name)
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(", ") || "";
+
   node.querySelector(".card-subtitle").textContent = [year, genreNames]
     .filter(Boolean)
     .join(" • ");
@@ -137,7 +150,8 @@ async function fetchMovies(page = 1) {
 
     if (movies.length === 0) {
       if (page === 1) {
-        grid.innerHTML = '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
+        grid.innerHTML =
+          '<div class="empty-state"><p>Aucun film trouvé pour ces critères.</p></div>';
       }
       resultsCount.textContent = "Aucun résultat";
     } else {
@@ -148,14 +162,17 @@ async function fetchMovies(page = 1) {
       });
 
       const totalResults = Math.min(data.total_results || 0, 10000);
-      resultsCount.textContent = `${totalResults.toLocaleString()} film${totalResults > 1 ? "s" : ""}`;
+      resultsCount.textContent = `${totalResults.toLocaleString()} film${
+        totalResults > 1 ? "s" : ""
+      }`;
     }
 
     updatePagination();
   } catch (error) {
     console.error("[Browse] Erreur chargement films:", error);
     if (page === 1) {
-      grid.innerHTML = '<div class="error-state"><p>Erreur lors du chargement des films.</p></div>';
+      grid.innerHTML =
+        '<div class="error-state"><p>Erreur lors du chargement des films.</p></div>';
       resultsCount.textContent = "Erreur";
     }
   }
