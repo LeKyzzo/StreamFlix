@@ -232,7 +232,8 @@ async function loadHeroRotation() {
 }
 
 async function renderCollection(grid) {
-  const defaultCount = grid.classList.contains("top10") ? 10 : 6;
+  // Top 10 reste à 10, autres sections on étend (ex: 24) sauf si data-skeleton fournit une valeur autre
+  const defaultCount = grid.classList.contains("top10") ? 10 : 24;
   const count = Math.max(Number(grid.dataset.skeleton) || defaultCount, 3);
 
   // Skeletons init
