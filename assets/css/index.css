@@ -1,0 +1,225 @@
+/* StreamFlix - Index Page Styles */
+
+/* Hero */
+.hero {
+  padding-block: calc(var(--space-6) + var(--header-offset, 64px))
+    var(--space-6);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+.hero-title {
+  font-size: var(--fs-800);
+  margin: 0.25rem 0;
+}
+.hero-subtitle {
+  color: var(--muted);
+  margin: 0 0 var(--space-4);
+}
+.hero-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.hero-media {
+  height: 260px;
+  position: relative;
+}
+.poster-layer {
+  position: absolute;
+  inset: auto 0 0 auto;
+  width: 50%;
+  height: 100%;
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
+}
+.layer-back {
+  right: 20%;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--primary) 40%, transparent),
+    transparent
+  );
+  transform: translate(10px, -6px) rotate(-4deg);
+}
+.layer-mid {
+  right: 10%;
+  background: linear-gradient(135deg, #8882, transparent);
+  transform: translate(14px, -2px) rotate(-2deg);
+}
+.layer-front {
+  right: 0;
+  background: linear-gradient(135deg, #fff2, transparent);
+}
+
+/* Hero */
+@media (hover: hover) {
+  .grid.movies > .movie-card {
+    transition: transform var(--dur-2) var(--ease-std);
+  }
+  .grid.movies > .movie-card:hover {
+    transform: translateY(-4px);
+    z-index: 2;
+    width: var(--card-w);
+    flex-basis: var(--card-w);
+  }
+  .grid.movies > .movie-card:focus-within {
+    transform: translateY(-4px);
+    z-index: 2;
+    width: var(--card-w);
+    flex-basis: var(--card-w);
+  }
+  .movie-card:hover .card-img {
+    transform: scale(1.05);
+  }
+  .movie-card {
+    perspective: 800px;
+  }
+  .movie-card:hover .card-media {
+    transform: translateZ(10px) rotateY(4deg);
+    transform-origin: center left;
+    transition: transform var(--dur-3) var(--ease-std);
+  }
+}
+
+/* Top 10 ranking */
+.grid.top10 {
+  counter-reset: rank;
+}
+.grid.top10 .movie-card {
+  counter-increment: rank;
+  position: relative;
+}
+
+/* Pastilles de classement */
+.grid.top10 .movie-card::before {
+  content: counter(rank);
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-400);
+  font-weight: 700;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--border);
+  transition: all var(--dur-2) var(--ease-std);
+  opacity: 0;
+}
+
+/* Pastilles toujours visibles pour le podium (1,2,3) */
+.grid.top10 .movie-card:nth-child(1)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  border-color: #ffd700;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.grid.top10 .movie-card:nth-child(2)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+  color: #000;
+  border-color: #c0c0c0;
+  box-shadow: 0 4px 12px rgba(192, 192, 192, 0.4);
+}
+
+.grid.top10 .movie-card:nth-child(3)::before {
+  opacity: 1;
+  background: linear-gradient(135deg, #cd7f32, #d2691e);
+  color: white;
+  border-color: #cd7f32;
+  box-shadow: 0 4px 12px rgba(205, 127, 50, 0.4);
+}
+
+/* Pastilles visibles au hover pour les autres positions (4-10) */
+.grid.top10 .movie-card:nth-child(n + 4):hover::before,
+.grid.top10 .movie-card:nth-child(n + 4):focus-within::before {
+  opacity: 1;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
+/* Animation au hover pour toutes les pastilles */
+.grid.top10 .movie-card:hover::before,
+.grid.top10 .movie-card:focus-within::before {
+  transform: scale(1.1);
+}
+
+.grid.top10 .movie-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tilt animation */
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
+}
+.parallax-tilt {
+  animation: tilt 6s ease-in-out infinite;
+}
+
+@media (min-width: 720px) {
+  .hero-media {
+    height: 320px;
+  }
+  .grid.movies > * {
+    --card-w: clamp(200px, 20vw, 260px);
+    width: var(--card-w);
+    flex-basis: var(--card-w);
+    --card-h: 260px;
+  }
+  .grid.movies.landscape > * {
+    --card-w: clamp(220px, 26vw, 320px);
+    --card-h: calc(var(--card-w) * 9 / 16);
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+  .grid.movies > * {
+    --card-w: clamp(220px, 18vw, 280px);
+    width: var(--card-w);
+    flex-basis: var(--card-w);
+    --card-h: 280px;
+  }
+  .grid.movies.landscape > * {
+    --card-w: clamp(240px, 22vw, 340px);
+    --card-h: calc(var(--card-w) * 9 / 16);
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid.movies > * {
+    --card-w: 280px;
+    width: var(--card-w);
+    flex-basis: var(--card-w);
+    --card-h: 300px;
+  }
+  .grid.movies.landscape > * {
+    --card-w: 280px;
+    --card-h: calc(var(--card-w) * 9 / 16);
+  }
+}

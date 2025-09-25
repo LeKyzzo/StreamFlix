@@ -1,0 +1,133 @@
+/* StreamFlix - Browse Page Styles */
+
+/* Catalog page */
+.catalog-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3);
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  border-radius: var(--radius-m);
+}
+.catalog-toolbar .input {
+  width: 100%;
+  max-width: 520px;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-m);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: var(--card);
+  color: var(--text);
+}
+.catalog-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Search and filters */
+.search-section {
+  display: flex;
+  gap: var(--space-3);
+}
+.filters-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.results-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-200);
+  color: var(--muted);
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+#pageInfo {
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* In catalog grid, keep width stable on hover */
+.catalog-grid .movie-card {
+  transition: transform var(--dur-2) var(--ease-std);
+}
+.catalog-grid .movie-card:hover {
+  transform: translateY(-4px);
+}
+.catalog-grid .movie-card:hover .card-img {
+  transform: scale(1.05);
+}
+
+/* Other components */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.chips li {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  border-radius: 999px;
+  font-size: var(--fs-200);
+}
+
+/* States */
+.empty-state,
+.error-state,
+.loading,
+.empty,
+.error {
+  text-align: center;
+  padding: var(--space-4);
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+.error-state,
+.error {
+  color: var(--danger, #e74c3c);
+}
+
+@media (min-width: 720px) {
+  .catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .catalog-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .catalog-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-toolbar {
+    padding: var(--space-2);
+  }
+  .filters-section {
+    flex-direction: column;
+  }
+  .search-input {
+    min-width: auto;
+  }
+  .results-info {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+}
